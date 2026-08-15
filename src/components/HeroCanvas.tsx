@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
-import { Sparkles, Eye, ShieldCheck, ArrowRight, Award } from 'lucide-react';
+import { Sparkles, Eye, ShieldCheck, ArrowRight, Award, Crown } from 'lucide-react';
 import { Language } from '../types';
 import { translations } from '../data/translations';
 
@@ -49,7 +49,7 @@ export const HeroCanvas: React.FC<HeroCanvasProps> = ({
       pulseSpeed: number;
     }[] = [];
 
-    const goldColors = ['#fce8b3', '#d4af37', '#e5c158', '#f9e29c', '#ffffff'];
+    const goldColors = ['#b8860b', '#d4af37', '#e5c158', '#f9e29c', '#ffffff'];
 
     for (let i = 0; i < particlesCount; i++) {
       particles.push({
@@ -88,7 +88,7 @@ export const HeroCanvas: React.FC<HeroCanvasProps> = ({
         // Subtle glow for larger particles
         if (p.radius > 1.8) {
           ctx.shadowBlur = 8;
-          ctx.shadowColor = '#e5c158';
+          ctx.shadowColor = '#d4af37';
         } else {
           ctx.shadowBlur = 0;
         }
@@ -106,24 +106,24 @@ export const HeroCanvas: React.FC<HeroCanvasProps> = ({
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-44 sm:pt-48 pb-20 overflow-hidden bg-[#05110d] text-[#f7e7ce]">
+    <section className="relative min-h-[92vh] flex items-center justify-center pt-40 sm:pt-44 pb-16 overflow-hidden bg-[#faf7f0] dark:bg-[#05110d] text-[#1a1612] dark:text-[#f7e7ce] transition-colors duration-400">
       
       {/* Immersive UI Radial Gradient Atmosphere */}
-      <div className="absolute inset-0 opacity-40 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 20% 30%, #0d3b2e 0%, transparent 50%), radial-gradient(circle at 80% 70%, #0b2239 0%, transparent 50%)' }} />
+      <div className="absolute inset-0 opacity-30 dark:opacity-40 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 20% 30%, rgba(212,175,55,0.15) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(184,134,11,0.12) 0%, transparent 50%)' }} />
 
       {/* Decorative Ambient Blurs */}
-      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#d4af37] opacity-[0.05] blur-[120px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-[#004d40] opacity-[0.08] blur-[100px] rounded-full pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#d4af37] opacity-[0.08] dark:opacity-[0.05] blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-[#b8860b] opacity-[0.08] blur-[100px] rounded-full pointer-events-none" />
 
-      {/* Background Image with Dark Emerald Vignette */}
-      <div className="absolute inset-0 z-0 opacity-25">
+      {/* Background Image with Theme Vignette */}
+      <div className="absolute inset-0 z-0 opacity-15 dark:opacity-25">
         <img
           src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=2000&q=90"
           alt="Luxury Jewelry Banner"
-          className="w-full h-full object-cover object-center scale-105 filter brightness-40 contrast-125 mix-blend-luminosity"
+          className="w-full h-full object-cover object-center scale-105 filter contrast-110"
           referrerPolicy="no-referrer"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#05110d] via-[#05110d]/80 to-[#05110d]/90" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#faf7f0] dark:from-[#05110d] via-[#faf7f0]/80 dark:via-[#05110d]/80 to-[#faf7f0]/95 dark:to-[#05110d]/90" />
       </div>
 
       {/* Floating Sparkle Canvas */}
@@ -142,17 +142,17 @@ export const HeroCanvas: React.FC<HeroCanvasProps> = ({
           transition={{ duration: 0.8 }}
           className="inline-flex flex-col items-center justify-center gap-3"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#d4af37]/15 border border-[#d4af37]/40 text-[#d4af37] text-[11px] font-sans font-bold uppercase tracking-[0.25em] shadow-lg">
-            <Award className="w-3.5 h-3.5 text-[#d4af37]" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f4ebd0] dark:bg-[#d4af37]/15 border border-[#b8860b]/40 dark:border-[#d4af37]/40 text-[#8c1d1e] dark:text-[#d4af37] text-[11px] font-sans font-bold uppercase tracking-[0.25em] shadow-md">
+            <Award className="w-3.5 h-3.5 text-[#b8860b] dark:text-[#d4af37]" />
             <span>SANJAY JEWELLERS SARIYA • 30 YEARS OF TRUST & HERITAGE</span>
           </div>
 
           <div className="inline-flex items-center gap-4">
-            <div className="h-[1px] w-12 bg-[#d4af37]" />
-            <span className="text-[10px] uppercase tracking-[0.4em] font-sans text-[#d4af37] font-bold">
+            <div className="h-[1px] w-12 bg-[#b8860b] dark:bg-[#d4af37]" />
+            <span className="text-[10px] uppercase tracking-[0.35em] font-sans text-[#b8860b] dark:text-[#d4af37] font-bold">
               {t.tag}
             </span>
-            <div className="h-[1px] w-12 bg-[#d4af37]" />
+            <div className="h-[1px] w-12 bg-[#b8860b] dark:bg-[#d4af37]" />
           </div>
         </motion.div>
 
@@ -163,10 +163,10 @@ export const HeroCanvas: React.FC<HeroCanvasProps> = ({
           transition={{ duration: 0.9, delay: 0.2 }}
           className="space-y-2"
         >
-          <h1 className="text-5xl sm:text-7xl md:text-8xl font-serif font-light tracking-tight text-[#f7e7ce] leading-[1.05]">
+          <h1 className="text-5xl sm:text-7xl md:text-8xl font-serif font-bold tracking-tight text-[#1a1612] dark:text-[#f7e7ce] leading-[1.05]">
             {t.titleLine1}
           </h1>
-          <h2 className="text-4xl sm:text-6xl md:text-7xl font-serif italic text-[#d4af37] font-normal tracking-wide">
+          <h2 className="text-4xl sm:text-6xl md:text-7xl font-serif italic text-[#8c1d1e] dark:text-[#d4af37] font-normal tracking-wide">
             {t.titleLine2}
           </h2>
         </motion.div>
@@ -176,7 +176,7 @@ export const HeroCanvas: React.FC<HeroCanvasProps> = ({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="max-w-xl mx-auto text-sm sm:text-base text-[#f7e7ce]/70 font-sans font-light tracking-wide leading-relaxed"
+          className="max-w-xl mx-auto text-sm sm:text-base text-[#5c5244] dark:text-[#f7e7ce]/80 font-sans font-normal tracking-wide leading-relaxed"
         >
           {t.subtitle}
         </motion.p>
@@ -186,25 +186,25 @@ export const HeroCanvas: React.FC<HeroCanvasProps> = ({
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-4"
+          className="flex flex-col sm:flex-row items-center justify-center gap-5 pt-4"
         >
           <a
-            href="#prime-collection"
-            className="group flex items-center gap-4 w-fit"
+            href="#sone-chandi-catalog"
+            className="group flex items-center gap-3 w-fit"
           >
-            <div className="bg-[#d4af37] text-[#05110d] px-10 py-4 text-xs font-bold font-sans uppercase tracking-[0.2em] hover:bg-[#f7e7ce] transition-colors shadow-2xl">
+            <div className="bg-[#b8860b] dark:bg-[#d4af37] text-white dark:text-[#05110d] px-8 sm:px-10 py-4 text-xs font-bold font-sans uppercase tracking-[0.2em] hover:bg-[#8c1d1e] dark:hover:bg-[#f7e7ce] transition-colors shadow-xl rounded-l-md">
               {t.exploreBtn}
             </div>
-            <div className="w-12 h-12 rounded-full border border-[#d4af37] flex items-center justify-center group-hover:bg-[#d4af37]/10 transition-colors">
-              <div className="w-2 h-2 border-t-2 border-r-2 border-[#d4af37] rotate-45 ml-[-2px]" />
+            <div className="w-12 h-12 rounded-r-md bg-[#8c1d1e] dark:bg-[#b8860b] text-white flex items-center justify-center group-hover:bg-[#1a1612] transition-colors shadow-xl">
+              <ArrowRight className="w-4 h-4" />
             </div>
           </a>
 
           <button
             onClick={onOpenTryOn}
-            className="border border-[#d4af37]/40 hover:border-[#d4af37] text-[#d4af37] px-8 py-4 text-xs font-bold font-sans uppercase tracking-[0.2em] hover:bg-[#d4af37]/10 transition-colors flex items-center gap-2"
+            className="border-2 border-[#b8860b] dark:border-[#d4af37]/60 hover:border-[#8c1d1e] dark:hover:border-[#d4af37] text-[#8c1d1e] dark:text-[#d4af37] bg-white/70 dark:bg-transparent px-8 py-3.5 text-xs font-bold font-sans uppercase tracking-[0.2em] hover:bg-[#f4ebd0] dark:hover:bg-[#d4af37]/10 transition-colors flex items-center gap-2 rounded-md shadow-sm"
           >
-            <Eye className="w-4 h-4 text-[#d4af37]" />
+            <Eye className="w-4 h-4 text-[#b8860b] dark:text-[#d4af37]" />
             <span>{t.tryOnBtn}</span>
           </button>
         </motion.div>
@@ -214,19 +214,19 @@ export const HeroCanvas: React.FC<HeroCanvasProps> = ({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.8 }}
-          className="grid grid-cols-2 sm:grid-cols-3 gap-4 max-w-3xl mx-auto pt-10 border-t border-[#d4af37]/10 text-xs font-sans tracking-widest uppercase opacity-80"
+          className="grid grid-cols-2 sm:grid-cols-3 gap-4 max-w-3xl mx-auto pt-10 border-t border-[#e6dac1] dark:border-[#d4af37]/20 text-xs font-sans tracking-widest uppercase"
         >
-          <div className="flex items-center justify-center gap-2 bg-[#0b2239]/40 p-3 rounded-lg border border-[#d4af37]/15">
-            <ShieldCheck className="w-4 h-4 text-[#d4af37] shrink-0" />
-            <span className="font-bold text-[10px] text-[#f7e7ce]">100% BIS Hallmarked</span>
+          <div className="flex items-center justify-center gap-2 bg-white/90 dark:bg-[#0b2239]/40 p-3 rounded-xl border border-[#e6dac1] dark:border-[#d4af37]/15 shadow-sm">
+            <ShieldCheck className="w-4 h-4 text-[#b8860b] dark:text-[#d4af37] shrink-0" />
+            <span className="font-bold text-[10px] text-[#1a1612] dark:text-[#f7e7ce]">100% BIS Hallmarked</span>
           </div>
-          <div className="flex items-center justify-center gap-2 bg-[#0b2239]/40 p-3 rounded-lg border border-[#d4af37]/15">
-            <Award className="w-4 h-4 text-[#d4af37] shrink-0" />
-            <span className="font-bold text-[10px] text-[#f7e7ce]">Lifetime Guarantee</span>
+          <div className="flex items-center justify-center gap-2 bg-white/90 dark:bg-[#0b2239]/40 p-3 rounded-xl border border-[#e6dac1] dark:border-[#d4af37]/15 shadow-sm">
+            <Award className="w-4 h-4 text-[#b8860b] dark:text-[#d4af37] shrink-0" />
+            <span className="font-bold text-[10px] text-[#1a1612] dark:text-[#f7e7ce]">Lifetime Guarantee</span>
           </div>
-          <div className="col-span-2 sm:col-span-1 flex items-center justify-center gap-2 bg-[#0b2239]/40 p-3 rounded-lg border border-[#d4af37]/15">
-            <Sparkles className="w-4 h-4 text-[#d4af37] shrink-0" />
-            <span className="font-bold text-[10px] text-[#f7e7ce]">VIP Concierge Trial</span>
+          <div className="col-span-2 sm:col-span-1 flex items-center justify-center gap-2 bg-white/90 dark:bg-[#0b2239]/40 p-3 rounded-xl border border-[#e6dac1] dark:border-[#d4af37]/15 shadow-sm">
+            <Sparkles className="w-4 h-4 text-[#b8860b] dark:text-[#d4af37] shrink-0" />
+            <span className="font-bold text-[10px] text-[#1a1612] dark:text-[#f7e7ce]">VIP Doorstep Trial</span>
           </div>
         </motion.div>
 

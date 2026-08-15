@@ -51,161 +51,155 @@ export const VirtualTryOnModal: React.FC<VirtualTryOnModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
-      <div className="relative w-full max-w-4xl bg-[#041d15] border border-amber-500/40 rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-fadeIn">
+      <div className="relative w-full max-w-4xl bg-white dark:bg-[#041d15] border-2 border-[#b8860b]/40 dark:border-amber-500/40 rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh] text-[#1a1612] dark:text-amber-100">
         
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-30 p-2 bg-emerald-950/80 border border-amber-400/50 text-amber-200 rounded-full hover:bg-amber-400 hover:text-emerald-950 transition-colors"
+          className="absolute top-4 right-4 z-30 p-2 bg-[#f4ebd0] dark:bg-emerald-950/80 border border-[#b8860b]/40 dark:border-amber-400/50 text-[#8c1d1e] dark:text-amber-200 rounded-full hover:bg-[#8c1d1e] hover:text-white transition-colors"
           aria-label="Close"
         >
           <X className="w-5 h-5" />
         </button>
 
-        {/* Left Live Visualizer Stage */}
-        <div className="relative flex-1 bg-emerald-950/90 flex items-center justify-center overflow-hidden min-h-[360px] md:min-h-[500px]">
-          {/* Model Background */}
+        {/* Left Interactive Canvas Visualizer */}
+        <div className="w-full md:w-3/5 relative bg-black/5 overflow-hidden flex items-center justify-center min-h-[350px]">
           <img
             src={attireModels[attire].bg}
-            alt={attireModels[attire].name}
-            className="w-full h-full object-cover filter brightness-90 contrast-110"
+            alt="Model Attire"
+            className="w-full h-full object-cover object-center"
             referrerPolicy="no-referrer"
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
 
-          {/* Jewellery Overlay Element */}
+          {/* Overlayed Jewelry Simulation */}
           <div
-            className="absolute transition-transform duration-200 pointer-events-none drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]"
+            className="absolute z-20 pointer-events-none transition-all duration-150"
             style={{
               transform: `translateY(${offsetY}px) scale(${scale / 100})`,
-              width: '65%',
-              maxWidth: '320px',
             }}
           >
             <img
               src={activeProduct.image}
-              alt={activeProduct.name[currentLang]}
-              className="w-full h-auto filter drop-shadow-[0_0_15px_rgba(229,193,88,0.5)]"
+              alt="Jewelry Try On"
+              className="w-48 sm:w-56 h-auto drop-shadow-[0_15px_25px_rgba(0,0,0,0.8)] filter contrast-125"
               referrerPolicy="no-referrer"
             />
           </div>
 
-          {/* Watermark Branding */}
-          <div className="absolute bottom-4 left-4 bg-emerald-950/80 border border-amber-500/40 px-3 py-1.5 rounded-lg text-[11px] font-serif font-bold text-gold-gradient backdrop-blur-md">
-            Swarna Mahal • Virtual Try-On
+          {/* Success Banner */}
+          {savedSuccess && (
+            <div className="absolute top-4 left-4 z-30 bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-lg animate-bounce">
+              <Check className="w-4 h-4" />
+              <span>Preview Look Saved!</span>
+            </div>
+          )}
+
+          {/* Model selection tabs over image */}
+          <div className="absolute bottom-4 left-4 right-4 z-20 flex gap-2 overflow-x-auto no-scrollbar">
+            {(['saree', 'lehenga', 'anarkali', 'gown'] as const).map((key) => (
+              <button
+                key={key}
+                onClick={() => setAttire(key)}
+                className={`px-3 py-1.5 rounded-xl text-[11px] font-sans font-bold capitalize whitespace-nowrap transition-all ${
+                  attire === key
+                    ? 'bg-[#b8860b] dark:bg-amber-400 text-white dark:text-emerald-950 shadow-lg scale-105'
+                    : 'bg-black/60 text-white/80 hover:bg-black/80'
+                }`}
+              >
+                {key}
+              </button>
+            ))}
           </div>
         </div>
 
         {/* Right Controls Panel */}
-        <div className="w-full md:w-80 p-6 bg-[#06231a] border-t md:border-t-0 md:border-l border-amber-500/30 space-y-6 overflow-y-auto">
+        <div className="w-full md:w-2/5 p-6 space-y-5 overflow-y-auto bg-[#faf6ee] dark:bg-[#041d15]">
           
           <div className="space-y-1">
-            <div className="inline-flex items-center gap-1.5 text-xs text-amber-300 font-semibold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f4ebd0] dark:bg-amber-500/10 border border-[#b8860b]/30 dark:border-amber-500/30 text-[#8c1d1e] dark:text-amber-300 text-[10px] font-sans font-bold uppercase tracking-wider">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>{t.title}</span>
+              <span>Virtual Fitting Room</span>
             </div>
-            <h3 className="text-xl font-serif font-bold text-amber-100">
+            <h3 className="text-xl font-serif font-bold text-[#1a1612] dark:text-amber-100">
               {activeProduct.name[currentLang]}
             </h3>
-            <p className="text-xs text-amber-300 font-mono">
-              ₹{activeProduct.price.toLocaleString('en-IN')} • {activeProduct.purity}
-            </p>
+            <span className="text-xs font-mono font-bold text-[#8c1d1e] dark:text-amber-300">
+              {activeProduct.purity} • ₹{activeProduct.price.toLocaleString('en-IN')}
+            </span>
           </div>
 
-          {/* Product Switcher Thumbnail Strip */}
+          {/* Jewelry selector */}
           <div className="space-y-2">
-            <label className="text-xs text-amber-200/80 font-semibold uppercase tracking-wider block">
-              Select Jewellery Piece
+            <label className="text-xs font-bold uppercase tracking-wider text-[#1a1612] dark:text-amber-200 block">
+              Choose Product to Try On:
             </label>
-            <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-none">
-              {products.map((p) => (
+            <div className="flex gap-2 overflow-x-auto no-scrollbar py-1">
+              {products.slice(0, 6).map((p) => (
                 <button
                   key={p.id}
                   onClick={() => onSelectProduct(p)}
-                  className={`relative w-14 h-14 rounded-lg overflow-hidden border shrink-0 transition-all ${
+                  className={`w-14 h-14 shrink-0 rounded-xl overflow-hidden border-2 transition-all ${
                     activeProduct.id === p.id
-                      ? 'border-amber-400 ring-2 ring-amber-400/50 scale-105'
-                      : 'border-amber-500/20 opacity-60 hover:opacity-100'
+                      ? 'border-[#b8860b] dark:border-amber-400 scale-105 shadow-md'
+                      : 'border-[#e6dac1] dark:border-amber-500/20 opacity-60'
                   }`}
                 >
-                  <img src={p.image} alt={p.name.en} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                  <img src={p.image} alt="" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                 </button>
               ))}
             </div>
           </div>
 
-          {/* Attire Selection */}
+          {/* Adjustments */}
+          <div className="space-y-3 p-4 bg-white dark:bg-[#02120d] rounded-2xl border border-[#e6dac1] dark:border-amber-500/20">
+            <div className="flex items-center justify-between text-xs font-bold text-[#1a1612] dark:text-amber-200">
+              <span>Scale Size:</span>
+              <span className="font-mono text-[#8c1d1e] dark:text-amber-300">{scale}%</span>
+            </div>
+            <input
+              type="range"
+              min="60"
+              max="140"
+              value={scale}
+              onChange={(e) => setScale(Number(e.target.value))}
+              className="w-full accent-[#b8860b] dark:accent-amber-400 cursor-pointer"
+            />
+
+            <div className="flex items-center justify-between text-xs font-bold text-[#1a1612] dark:text-amber-200 pt-2">
+              <span>Neckline Position:</span>
+              <span className="font-mono text-[#8c1d1e] dark:text-amber-300">{offsetY}px</span>
+            </div>
+            <input
+              type="range"
+              min="-60"
+              max="60"
+              value={offsetY}
+              onChange={(e) => setOffsetY(Number(e.target.value))}
+              className="w-full accent-[#b8860b] dark:accent-amber-400 cursor-pointer"
+            />
+          </div>
+
+          {/* Actions */}
           <div className="space-y-2">
-            <label className="text-xs text-amber-200/80 font-semibold uppercase tracking-wider block">
-              {t.selectModel}
-            </label>
-            <div className="grid grid-cols-2 gap-2">
-              {(Object.keys(attireModels) as (keyof typeof attireModels)[]).map((key) => (
-                <button
-                  key={key}
-                  onClick={() => setAttire(key)}
-                  className={`p-2 rounded-lg text-xs font-medium text-left border transition-all ${
-                    attire === key
-                      ? 'bg-amber-400 text-emerald-950 font-bold border-amber-300 shadow-md'
-                      : 'bg-emerald-950/60 text-amber-200 border-amber-500/30 hover:border-amber-400'
-                  }`}
-                >
-                  {attireModels[key].name}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Positioning Sliders */}
-          <div className="space-y-4 pt-2 border-t border-amber-500/20">
-            <div className="space-y-1">
-              <div className="flex justify-between text-xs text-amber-200/80">
-                <span>{t.adjustSize}</span>
-                <span className="font-mono">{scale}%</span>
-              </div>
-              <input
-                type="range"
-                min="60"
-                max="140"
-                value={scale}
-                onChange={(e) => setScale(Number(e.target.value))}
-                className="w-full accent-amber-400"
-              />
-            </div>
-
-            <div className="space-y-1">
-              <div className="flex justify-between text-xs text-amber-200/80">
-                <span>Vertical Alignment</span>
-                <span className="font-mono">{offsetY}px</span>
-              </div>
-              <input
-                type="range"
-                min="-60"
-                max="60"
-                value={offsetY}
-                onChange={(e) => setOffsetY(Number(e.target.value))}
-                className="w-full accent-amber-400"
-              />
-            </div>
-          </div>
-
-          {/* Save Action */}
-          <div className="space-y-2 pt-2">
             <button
               onClick={handleSavePreview}
-              className="w-full gold-shimmer-btn text-emerald-950 font-bold text-xs uppercase py-3 rounded-xl shadow-lg flex items-center justify-center gap-2"
+              className="w-full gold-shimmer-btn text-white dark:text-emerald-950 font-bold text-xs uppercase py-3 rounded-xl shadow-lg flex items-center justify-center gap-2"
             >
-              {savedSuccess ? (
-                <>
-                  <Check className="w-4 h-4 text-emerald-900" />
-                  <span>Preview Saved to Gallery!</span>
-                </>
-              ) : (
-                <>
-                  <Camera className="w-4 h-4" />
-                  <span>{t.takeScreenshot}</span>
-                </>
-              )}
+              <Camera className="w-4 h-4" />
+              <span>{t.takeScreenshot}</span>
+            </button>
+
+            <button
+              onClick={() => {
+                setScale(100);
+                setOffsetY(0);
+              }}
+              className="w-full bg-transparent hover:bg-black/5 text-[#5c5244] dark:text-amber-200/60 font-semibold text-xs py-2 rounded-xl flex items-center justify-center gap-1.5"
+            >
+              <RotateCcw className="w-3.5 h-3.5" />
+              <span>Reset Position</span>
             </button>
           </div>
 

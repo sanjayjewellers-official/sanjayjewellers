@@ -23,9 +23,9 @@ export default function App() {
   const [currentTheme, setCurrentTheme] = useState<Theme>(() => {
     try {
       const saved = localStorage.getItem('swarna_theme');
-      return (saved as Theme) || 'dark';
+      return (saved as Theme) || 'light';
     } catch {
-      return 'dark';
+      return 'light';
     }
   });
 
@@ -142,7 +142,7 @@ export default function App() {
   const totalCartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <div className="min-h-screen bg-emerald-deeper text-amber-100 font-sans selection:bg-amber-400 selection:text-emerald-950">
+    <div className="min-h-screen theme-bg-primary theme-text-primary font-sans selection:bg-[#d4af37] selection:text-[#1a1612] transition-colors duration-400">
       
       {/* Header */}
       <Header

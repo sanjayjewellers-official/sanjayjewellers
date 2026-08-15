@@ -1,43 +1,64 @@
 @import "tailwindcss";
 
 :root {
-  /* Default Light Mode Theme System */
-  --bg-primary: #fbf8f1;
+  /* Default Light Theme - Regal Cream & Royal Gold */
+  --bg-primary: #fcf9f2;
   --bg-surface: #ffffff;
-  --bg-card: #f4edd8;
-  --bg-card-hover: #ede3c7;
-  --text-primary: #1c1917;
-  --text-secondary: #574e44;
-  --text-accent: #8c1d1e; /* Deep Maroon */
+  --bg-surface-elevated: #ffffff;
+  --bg-card: #f7f1e1;
+  --bg-card-hover: #eee5cb;
+  --bg-header: rgba(255, 255, 255, 0.95);
+  --bg-topbar: #1c150c;
+  --text-primary: #1a1612;
+  --text-secondary: #5c5244;
+  --text-muted: #827563;
+  --text-accent: #8c1d1e; /* Imperial Maroon */
   --brand-gold: #b8860b;
   --brand-gold-bright: #d4af37;
-  --border-subtle: #e2d2b4;
+  --brand-gold-deep: #996f08;
+  --border-subtle: #e6dac1;
+  --border-strong: #d4af37;
   --shadow-card: 0 10px 30px rgba(184, 134, 11, 0.08);
+  --shadow-dropdown: 0 20px 40px rgba(28, 21, 12, 0.12);
+  --badge-bg: rgba(184, 134, 11, 0.12);
+  --badge-border: rgba(184, 134, 11, 0.35);
+  --badge-text: #8a6406;
 }
 
 .dark {
-  /* Dark Mode Theme System */
+  /* Dark Mode Theme - Imperial Emerald & Midnight Gold */
   --bg-primary: #05110d;
   --bg-surface: #0b2239;
+  --bg-surface-elevated: #0d3b2e;
   --bg-card: #0d3b2e;
   --bg-card-hover: #124d3c;
+  --bg-header: rgba(5, 17, 13, 0.95);
+  --bg-topbar: #030a08;
   --text-primary: #f7e7ce;
   --text-secondary: #d4af37;
+  --text-muted: #a69880;
   --text-accent: #f7e7ce;
   --brand-gold: #d4af37;
   --brand-gold-bright: #f7e7ce;
+  --brand-gold-deep: #b8860b;
   --border-subtle: rgba(212, 175, 55, 0.25);
+  --border-strong: rgba(212, 175, 55, 0.6);
   --shadow-card: 0 20px 40px rgba(0, 0, 0, 0.7);
+  --shadow-dropdown: 0 25px 50px rgba(0, 0, 0, 0.8);
+  --badge-bg: rgba(212, 175, 55, 0.15);
+  --badge-border: rgba(212, 175, 55, 0.4);
+  --badge-text: #d4af37;
 }
 
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   transition: background-color 0.4s ease, color 0.4s ease;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 
 @layer utilities {
-  /* Theme-aware background utilities */
+  /* Theme-aware background & text utilities */
   .theme-bg-primary {
     background-color: var(--bg-primary);
   }
@@ -47,54 +68,37 @@ body {
   .theme-bg-card {
     background-color: var(--bg-card);
   }
+  .theme-bg-card-hover:hover {
+    background-color: var(--bg-card-hover);
+  }
   .theme-text-primary {
     color: var(--text-primary);
   }
   .theme-text-secondary {
     color: var(--text-secondary);
   }
+  .theme-text-muted {
+    color: var(--text-muted);
+  }
   .theme-border {
     border-color: var(--border-subtle);
   }
-
-  .bg-emerald-dark {
-    background-color: #0d3b2e;
+  .theme-border-strong {
+    border-color: var(--border-strong);
   }
-  .bg-emerald-deeper {
-    background-color: #05110d;
-  }
-  .bg-midnight-navy {
-    background-color: #0b2239;
-  }
-  .bg-imperial-footer {
-    background-color: #030a08;
-  }
-  
-  .bg-immersive-overlay {
-    background-image: radial-gradient(circle at 20% 30%, var(--bg-card) 0%, transparent 50%), radial-gradient(circle at 80% 70%, var(--bg-surface) 0%, transparent 50%);
+  .theme-shadow {
+    box-shadow: var(--shadow-card);
   }
 
   .text-gold-gradient {
-    background: linear-gradient(135deg, #f7e7ce 0%, #d4af37 50%, #b8860b 100%);
+    background: linear-gradient(135deg, #b8860b 0%, #d4af37 50%, #996f08 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-
-  .text-gold-light {
-    color: #f7e7ce;
-  }
-
-  .text-gold-imperial {
-    color: var(--brand-gold);
-  }
-
-  .border-gold-subtle {
-    border-color: var(--border-subtle);
-  }
-
-  .border-gold-glow {
-    border-color: rgba(212, 175, 55, 0.6);
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.25);
+  .dark .text-gold-gradient {
+    background: linear-gradient(135deg, #f7e7ce 0%, #d4af37 50%, #b8860b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
   .gold-shimmer-btn {
@@ -103,22 +107,22 @@ body {
     transition: all 0.3s ease;
   }
   .dark .gold-shimmer-btn {
-    background: #d4af37;
+    background: linear-gradient(135deg, #d4af37 0%, #f7e7ce 100%);
     color: #05110d;
   }
   .gold-shimmer-btn:hover {
-    box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.45);
     transform: translateY(-2px);
   }
 
   .card-3d-glow {
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+    transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.35s ease;
   }
   .card-3d-glow:hover {
     box-shadow: var(--shadow-card), 0 0 25px rgba(212, 175, 55, 0.25);
   }
 
-  /* Shimmer light sweep across product cards */
+  /* Shimmer light sweep */
   .shimmer-sweep {
     position: relative;
     overflow: hidden;
@@ -133,7 +137,7 @@ body {
     background: linear-gradient(
       60deg,
       transparent 30%,
-      rgba(212, 175, 55, 0.15) 50%,
+      rgba(212, 175, 55, 0.18) 50%,
       transparent 70%
     );
     transform: rotate(30deg) translateY(-100%);
@@ -142,6 +146,19 @@ body {
   .shimmer-sweep:hover::after {
     transform: rotate(30deg) translateY(100%);
   }
+
+  /* Special Highlight Pulse for Payal & Desi Jewellery */
+  .highlight-desi {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(184, 134, 11, 0.25) 100%);
+    border: 1.5px solid #d4af37;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+  }
+
+  .highlight-payal {
+    background: linear-gradient(135deg, rgba(192, 192, 192, 0.2) 0%, rgba(212, 175, 55, 0.2) 100%);
+    border: 1.5px solid #c0c0c0;
+    box-shadow: 0 0 15px rgba(192, 192, 192, 0.35);
+  }
 }
 
 /* Custom Luxury Scrollbar */
@@ -149,22 +166,21 @@ body {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #030a08;
+  background: var(--bg-primary);
 }
 ::-webkit-scrollbar-thumb {
-  background: #d4af37;
+  background: var(--brand-gold);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #f7e7ce;
+  background: var(--brand-gold-bright);
 }
 
 @keyframes pulseGold {
-  0%, 100% { opacity: 0.6; }
-  50% { opacity: 1; filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.8)); }
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.03); filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.8)); }
 }
 
 .animate-pulse-gold {
-  animation: pulseGold 3s infinite ease-in-out;
+  animation: pulseGold 2.5s infinite ease-in-out;
 }
-

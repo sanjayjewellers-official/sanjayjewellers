@@ -1,34 +1,31 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Star, Quote, CheckCircle, Sparkles } from 'lucide-react';
-import { Review, Language } from '../types';
+import { Star, MessageSquareQuote, CheckCircle2, Crown } from 'lucide-react';
+import { Language } from '../types';
 import { REVIEWS } from '../data/products';
-import { translations } from '../data/translations';
 
 interface ReviewsSectionProps {
   currentLang: Language;
 }
 
 export const ReviewsSection: React.FC<ReviewsSectionProps> = ({ currentLang }) => {
-  const t = translations[currentLang].reviews;
-
   return (
-    <section id="reviews" className="py-20 bg-[#05110d] relative border-t border-[#d4af37]/20 text-[#f7e7ce]">
+    <section id="reviews" className="py-20 theme-bg-surface relative border-t theme-border text-[#1a1612] dark:text-[#f7e7ce] transition-colors duration-400">
       <div className="max-w-7xl mx-auto px-4 sm:px-12 space-y-12">
         
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/30 text-[#d4af37] text-[10px] font-sans font-bold uppercase tracking-[0.3em]">
-            <Sparkles className="w-3.5 h-3.5 text-[#d4af37] animate-pulse" />
-            <span>Patron Experiences</span>
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto space-y-2">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#f4ebd0] dark:bg-[#d4af37]/15 border border-[#b8860b]/30 dark:border-[#d4af37]/30 text-[#8c1d1e] dark:text-[#d4af37] text-[10px] font-sans font-bold uppercase tracking-[0.25em]">
+            <Crown className="w-3.5 h-3.5 text-[#b8860b] dark:text-[#d4af37]" />
+            <span>Customer Testimonials</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-serif font-light text-[#f7e7ce]">
-            {t.title}
+          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-[#1a1612] dark:text-[#f7e7ce]">
+            Stories of Trust & Royal Grandeur
           </h2>
 
-          <p className="text-xs sm:text-sm text-[#f7e7ce]/70 font-sans font-light">
-            {t.subtitle}
+          <p className="text-xs sm:text-sm text-[#5c5244] dark:text-[#f7e7ce]/70 font-sans">
+            Hear from royal families who trusted Sanjay Jewellers Sariya for their grand wedding jewellery.
           </p>
         </div>
 
@@ -37,42 +34,43 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({ currentLang }) =
           {REVIEWS.map((review) => (
             <motion.div
               key={review.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="bg-[#0b2239]/80 border border-[#d4af37]/20 p-6 shadow-xl relative space-y-4 flex flex-col justify-between hover:border-[#d4af37] transition-colors"
+              transition={{ duration: 0.4 }}
+              className="theme-bg-card border-2 border-[#e6dac1] dark:border-[#d4af37]/25 rounded-3xl p-6 space-y-4 shadow-md flex flex-col justify-between"
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-1">
-                    {Array.from({ length: review.rating }).map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-[#d4af37] text-[#d4af37]" />
+                  <div className="flex items-center gap-1 text-amber-500">
+                    {[...Array(review.rating)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-current" />
                     ))}
                   </div>
-                  <Quote className="w-6 h-6 text-[#d4af37]/30 shrink-0" />
+                  <span className="text-[10px] font-mono text-[#5c5244] dark:text-[#f7e7ce]/60">
+                    {review.date}
+                  </span>
                 </div>
 
-                <p className="text-xs sm:text-sm text-[#f7e7ce]/90 font-serif italic leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#1a1612] dark:text-[#f7e7ce]/90 font-serif italic leading-relaxed">
                   "{review.comment[currentLang]}"
                 </p>
               </div>
 
-              <div className="pt-4 border-t border-[#d4af37]/20 flex items-center justify-between text-xs">
+              <div className="pt-4 border-t border-[#e6dac1] dark:border-[#d4af37]/20 flex items-center justify-between">
                 <div>
-                  <span className="font-serif font-light text-[#f7e7ce] block">
+                  <h4 className="text-xs font-sans font-bold text-[#1a1612] dark:text-[#f7e7ce]">
                     {review.author}
-                  </span>
-                  <span className="text-[10px] text-[#d4af37]/70 font-sans block">
-                    {review.location} • {review.date}
+                  </h4>
+                  <span className="text-[10px] text-[#5c5244] dark:text-[#f7e7ce]/60 block">
+                    {review.location}
                   </span>
                 </div>
 
-                {review.verifiedBuyer && (
-                  <span className="text-[10px] text-emerald-400 bg-[#05110d] px-2 py-1 border border-emerald-500/30 flex items-center gap-1 font-sans">
-                    <CheckCircle className="w-3 h-3" /> {t.verified}
-                  </span>
-                )}
+                <div className="flex items-center gap-1 text-[10px] text-emerald-700 dark:text-emerald-400 font-bold bg-emerald-100 dark:bg-emerald-950/80 px-2 py-1 rounded-full border border-emerald-300 dark:border-emerald-700">
+                  <CheckCircle2 className="w-3 h-3" />
+                  <span>Verified Buyer</span>
+                </div>
               </div>
             </motion.div>
           ))}

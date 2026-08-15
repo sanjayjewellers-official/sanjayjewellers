@@ -9,7 +9,8 @@ import {
   ChevronRight, 
   Star, 
   Maximize2,
-  Award
+  Award,
+  Crown
 } from 'lucide-react';
 import { Product, Language } from '../types';
 import { translations } from '../data/translations';
@@ -33,7 +34,7 @@ export const PrimeCollection: React.FC<PrimeCollectionProps> = ({
   onToggleWishlist,
   wishlistIds,
 }) => {
-  const [activeFilter, setActiveFilter] = useState<'all' | 'kundan' | 'temple' | 'emerald' | 'bridal'>('all');
+  const [activeFilter, setActiveFilter] = useState<'all' | 'kundan' | 'temple' | 'emerald' | 'bridal' | 'payal'>('all');
   const t = translations[currentLang].primeSection;
 
   const primeProducts = products.filter((p) => p.isPrimeCollection);
@@ -44,53 +45,51 @@ export const PrimeCollection: React.FC<PrimeCollectionProps> = ({
     if (activeFilter === 'temple') return p.name.en.toLowerCase().includes('temple');
     if (activeFilter === 'emerald') return p.name.en.toLowerCase().includes('emerald');
     if (activeFilter === 'bridal') return p.category === 'bridal';
+    if (activeFilter === 'payal') return p.mainCategory === 'pairon_chandi';
     return true;
   });
 
   return (
-    <section id="prime-collection" className="py-20 bg-[#05110d] relative overflow-hidden text-[#f7e7ce]">
+    <section id="prime-collection" className="py-20 theme-bg-primary relative overflow-hidden text-[#1a1612] dark:text-[#f7e7ce] transition-colors duration-400">
       
       {/* Decorative Immersive Pattern Backdrop */}
-      <div className="absolute inset-0 opacity-5 bg-[radial-gradient(#d4af37_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
+      <div className="absolute inset-0 opacity-5 bg-[radial-gradient(#b8860b_1px,transparent_1px)] dark:bg-[radial-gradient(#d4af37_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-12 relative z-10 space-y-12">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/30 text-[#d4af37] text-[10px] font-sans font-bold uppercase tracking-[0.3em] shadow-xl">
-            <Sparkles className="w-3.5 h-3.5 text-[#d4af37] animate-pulse" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f4ebd0] dark:bg-[#d4af37]/10 border border-[#b8860b]/30 dark:border-[#d4af37]/30 text-[#8c1d1e] dark:text-[#d4af37] text-[10px] font-sans font-bold uppercase tracking-[0.3em] shadow-sm">
+            <Crown className="w-3.5 h-3.5 text-[#b8860b] dark:text-[#d4af37]" />
             <span>{t.badge}</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-serif font-light text-[#f7e7ce] tracking-tight">
+          <h2 className="text-3xl sm:text-5xl font-serif font-bold text-[#1a1612] dark:text-[#f7e7ce]">
             {t.title}
           </h2>
 
-          <div className="text-lg sm:text-2xl font-serif text-[#d4af37] font-normal italic">
-            "{t.titleNative}"
-          </div>
-
-          <p className="text-xs sm:text-sm text-[#f7e7ce]/70 font-sans font-light leading-relaxed pt-2">
+          <p className="text-xs sm:text-sm text-[#5c5244] dark:text-[#f7e7ce]/70 font-sans font-normal max-w-xl mx-auto leading-relaxed">
             {t.subtitle}
           </p>
         </div>
 
-        {/* Filter Tab Bar */}
+        {/* Filter Pills */}
         <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
           {[
             { id: 'all', label: t.filterAll },
-            { id: 'kundan', label: t.filterKundan },
-            { id: 'temple', label: t.filterTemple },
-            { id: 'emerald', label: t.filterEmerald },
-            { id: 'bridal', label: t.filterBridal },
+            { id: 'kundan', label: '👑 Kundan & Desi Polki' },
+            { id: 'temple', label: '🏛️ Temple Gold' },
+            { id: 'emerald', label: '💎 Royal Emeralds' },
+            { id: 'bridal', label: '👰 Bridal Sets' },
+            { id: 'payal', label: '🌟 999 Payal Special' },
           ].map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveFilter(tab.id as any)}
-              className={`px-5 sm:px-7 py-2.5 text-xs font-sans font-bold tracking-widest uppercase transition-all duration-300 ${
+              className={`px-4 sm:px-5 py-2 rounded-full text-xs font-sans font-bold transition-all duration-300 ${
                 activeFilter === tab.id
-                  ? 'bg-[#d4af37] text-[#05110d] shadow-lg border border-[#d4af37]'
-                  : 'bg-[#0b2239] text-[#f7e7ce]/80 border border-[#d4af37]/20 hover:border-[#d4af37] hover:text-[#f7e7ce]'
+                  ? 'bg-[#b8860b] dark:bg-[#d4af37] text-white dark:text-[#05110d] shadow-lg scale-105'
+                  : 'theme-bg-surface border theme-border theme-text-secondary hover:border-[#b8860b] dark:hover:border-[#d4af37]'
               }`}
             >
               {tab.label}
@@ -98,7 +97,7 @@ export const PrimeCollection: React.FC<PrimeCollectionProps> = ({
           ))}
         </div>
 
-        {/* Product Cards Grid */}
+        {/* Prime Product Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProducts.map((product) => {
             const isWishlisted = wishlistIds.includes(product.id);
@@ -110,106 +109,103 @@ export const PrimeCollection: React.FC<PrimeCollectionProps> = ({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
-                className="group relative bg-[#0b2239] border border-[#d4af37]/20 overflow-hidden shadow-2xl card-3d-glow shimmer-sweep flex flex-col justify-between"
+                className="group relative theme-bg-surface border-2 border-[#e6dac1] dark:border-[#d4af37]/30 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 card-3d-glow flex flex-col justify-between"
               >
-                
-                {/* Image Container with Zoom & Badge */}
-                <div className="relative aspect-[4/3] overflow-hidden bg-[#0d3b2e]">
+                {/* Product Image & Overlays */}
+                <div className="relative aspect-[4/3] overflow-hidden bg-black/5">
                   <img
                     src={product.image}
                     alt={product.name[currentLang]}
                     className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 ease-out"
                     referrerPolicy="no-referrer"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0b2239] via-transparent to-transparent opacity-80" />
+                  
+                  {/* Subtle Vignette Gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
-                  {/* Top Badges */}
-                  <div className="absolute top-3 left-3 flex flex-col gap-1">
-                    <span className="bg-[#d4af37] text-[#05110d] font-bold text-[9px] font-sans uppercase tracking-widest px-2.5 py-1 shadow-lg flex items-center gap-1">
-                      <ShieldCheck className="w-3 h-3" />
+                  {/* Hallmarked Badge */}
+                  <div className="absolute top-4 left-4 flex flex-col gap-1.5 items-start">
+                    <span className="bg-[#b8860b] dark:bg-[#d4af37] text-white dark:text-black font-bold text-[10px] font-sans uppercase tracking-widest px-3 py-1 rounded-full shadow-lg flex items-center gap-1.5">
+                      <ShieldCheck className="w-3.5 h-3.5" />
                       {product.purity}
                     </span>
-                    <span className="bg-[#05110d]/90 border border-[#d4af37]/30 text-[#f7e7ce] text-[9px] font-mono px-2 py-0.5 uppercase tracking-wider">
-                      {product.goldWeightGrams}g Pure Gold
+                    <span className="bg-[#8c1d1e] text-white font-bold text-[9px] font-sans uppercase tracking-widest px-2.5 py-0.5 rounded-full shadow-md">
+                      30 Yr Heritage Signature
                     </span>
                   </div>
 
                   {/* Wishlist Button */}
                   <button
                     onClick={() => onToggleWishlist(product)}
-                    className={`absolute top-3 right-3 p-2.5 border transition-all ${
+                    className={`absolute top-4 right-4 p-2.5 rounded-full border backdrop-blur-md transition-all duration-300 shadow-lg ${
                       isWishlisted
-                        ? 'bg-rose-600 text-white border-rose-400 shadow-lg'
-                        : 'bg-[#05110d]/80 border-[#d4af37]/30 text-[#f7e7ce] hover:text-[#d4af37] hover:border-[#d4af37]'
+                        ? 'bg-rose-600 text-white border-rose-500'
+                        : 'bg-white/80 dark:bg-black/60 text-[#1a1612] dark:text-white border-[#e6dac1] dark:border-[#d4af37]/40 hover:text-[#b8860b] dark:hover:text-[#d4af37]'
                     }`}
-                    aria-label="Save to Wishlist"
+                    aria-label="Wishlist"
                   >
                     <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-current' : ''}`} />
                   </button>
 
-                  {/* Hover Quick Actions */}
-                  <div className="absolute inset-x-3 bottom-3 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  {/* Floating Action Buttons */}
+                  <div className="absolute bottom-4 inset-x-4 flex items-center gap-2">
                     <button
                       onClick={() => onQuickView(product)}
-                      className="flex-1 bg-[#05110d]/95 hover:bg-[#05110d] border border-[#d4af37]/50 text-[#f7e7ce] text-xs font-bold py-2 px-3 flex items-center justify-center gap-1.5 transition-colors shadow-lg"
+                      className="flex-1 bg-white/90 dark:bg-black/85 backdrop-blur-md text-[#1a1612] dark:text-[#f7e7ce] border border-[#b8860b]/40 dark:border-[#d4af37]/40 text-xs font-bold py-2 px-3 rounded-xl flex items-center justify-center gap-1.5 hover:bg-[#f4ebd0] dark:hover:bg-[#d4af37]/20 transition-all shadow-lg font-sans"
                     >
-                      <Eye className="w-3.5 h-3.5 text-[#d4af37]" />
+                      <Eye className="w-3.5 h-3.5 text-[#b8860b] dark:text-[#d4af37]" />
                       <span>{t.quickView}</span>
                     </button>
-
                     <button
                       onClick={() => onTryOn(product)}
-                      className="bg-[#d4af37] hover:bg-[#f7e7ce] text-[#05110d] text-xs font-bold py-2 px-3 flex items-center justify-center gap-1.5 transition-colors shadow-lg"
+                      className="flex-1 bg-[#b8860b] dark:bg-[#d4af37] text-white dark:text-black text-xs font-bold py-2 px-3 rounded-xl flex items-center justify-center gap-1.5 hover:bg-[#8c1d1e] dark:hover:bg-[#f7e7ce] transition-all shadow-lg font-sans"
                     >
-                      <Maximize2 className="w-3.5 h-3.5" />
+                      <Sparkles className="w-3.5 h-3.5" />
                       <span>{t.tryOn}</span>
                     </button>
                   </div>
                 </div>
 
-                {/* Card Details Content */}
+                {/* Card Information */}
                 <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
-                  <div className="space-y-1.5">
-                    <div className="flex items-center justify-between text-xs text-[#d4af37]">
-                      <span className="flex items-center gap-1">
-                        <Star className="w-3.5 h-3.5 fill-[#d4af37] text-[#d4af37]" />
-                        <span className="font-bold text-[#f7e7ce]">{product.rating}</span>
-                        <span className="text-[#f7e7ce]/50">({product.reviewCount})</span>
-                      </span>
-                      <span className="text-[10px] font-mono text-emerald-400 bg-[#05110d] px-2 py-0.5 border border-emerald-500/30">
-                        {product.hallmarkCode}
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between text-xs font-mono text-[#5c5244] dark:text-[#d4af37]">
+                      <span className="font-bold tracking-wider">{product.hallmarkCode}</span>
+                      <span className="flex items-center gap-1 text-amber-500 font-bold">
+                        <Star className="w-3.5 h-3.5 fill-current" />
+                        {product.rating} ({product.reviewCount})
                       </span>
                     </div>
 
-                    <h3 className="text-lg font-serif font-light text-[#f7e7ce] group-hover:text-[#d4af37] transition-colors line-clamp-1">
+                    <h3 className="text-xl font-serif font-bold text-[#1a1612] dark:text-[#f7e7ce] group-hover:text-[#b8860b] dark:group-hover:text-[#d4af37] transition-colors leading-tight">
                       {product.name[currentLang]}
                     </h3>
 
-                    <p className="text-xs text-[#f7e7ce]/60 font-sans font-light line-clamp-2">
+                    <p className="text-xs text-[#5c5244] dark:text-[#f7e7ce]/70 font-sans font-light leading-relaxed line-clamp-2">
                       {product.subtitle[currentLang]}
                     </p>
                   </div>
 
-                  {/* Pricing & Add to Cart */}
-                  <div className="pt-3 border-t border-[#d4af37]/20 flex items-center justify-between gap-2">
+                  {/* Price & Add to Bag CTA */}
+                  <div className="pt-4 border-t border-[#e6dac1] dark:border-[#d4af37]/20 flex items-center justify-between">
                     <div>
-                      <span className="text-[9px] uppercase tracking-widest text-[#d4af37]/70 font-sans block">Estimated Value</span>
-                      <span className="text-lg font-serif font-light text-[#f7e7ce]">
-                        ₹{product.price.toLocaleString('en-IN')}
+                      <span className="text-[10px] text-[#5c5244] dark:text-[#f7e7ce]/60 uppercase tracking-widest font-sans block">
+                        Estimated Value (incl. GST)
                       </span>
+                      <div className="text-xl sm:text-2xl font-serif font-bold text-[#8c1d1e] dark:text-[#d4af37]">
+                        ₹{product.price.toLocaleString('en-IN')}
+                      </div>
                     </div>
 
                     <button
                       onClick={() => onAddToCart(product)}
-                      className="bg-[#d4af37] text-[#05110d] hover:bg-[#f7e7ce] font-sans font-bold text-xs uppercase tracking-wider px-4 py-2.5 shadow-md flex items-center gap-1.5 transition-colors"
+                      className="gold-shimmer-btn p-3 rounded-2xl shadow-lg flex items-center justify-center text-white dark:text-[#05110d]"
+                      title={t.addToBag}
                     >
-                      <ShoppingBag className="w-3.5 h-3.5" />
-                      <span>{t.addToBag}</span>
+                      <ShoppingBag className="w-5 h-5" />
                     </button>
                   </div>
-
                 </div>
-
               </motion.div>
             );
           })}

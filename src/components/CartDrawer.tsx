@@ -37,11 +37,11 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   const grandTotal = Math.max(0, subtotal - totalDiscount);
 
   const handleApplyVoucher = () => {
-    if (voucherCode.trim().toUpperCase() === 'SWARNA1000') {
+    if (voucherCode.trim().toUpperCase() === 'SANJAY1000') {
       setVoucherDiscount(1000);
       setVoucherError('');
     } else {
-      setVoucherError('Invalid Voucher Code. Use SWARNA1000');
+      setVoucherError('Invalid Voucher Code. Try SANJAY1000');
     }
   };
 
@@ -51,175 +51,193 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex justify-end bg-black/70 backdrop-blur-sm animate-fadeIn">
-      <div className="w-full max-w-md bg-[#05110d] border-l border-[#d4af37]/30 h-full flex flex-col shadow-2xl relative text-[#f7e7ce]">
+      <div className="w-full max-w-md bg-white dark:bg-[#05110d] border-l-2 border-[#b8860b]/40 dark:border-[#d4af37]/30 h-full flex flex-col shadow-2xl relative text-[#1a1612] dark:text-[#f7e7ce]">
         
         {/* Drawer Header */}
-        <div className="p-5 border-b border-[#d4af37]/20 flex items-center justify-between bg-[#030a08]">
+        <div className="p-5 border-b border-[#e6dac1] dark:border-[#d4af37]/20 flex items-center justify-between bg-[#faf6ee] dark:bg-[#030a08]">
           <div className="flex items-center gap-2">
-            <ShoppingBag className="w-5 h-5 text-[#d4af37]" />
-            <h3 className="font-serif font-light text-lg text-[#f7e7ce]">
+            <ShoppingBag className="w-5 h-5 text-[#b8860b] dark:text-[#d4af37]" />
+            <h3 className="font-serif font-bold text-lg text-[#1a1612] dark:text-[#f7e7ce]">
               {t.title}
             </h3>
-            <span className="text-xs bg-[#d4af37]/20 text-[#d4af37] font-mono px-2 py-0.5 border border-[#d4af37]/30">
+            <span className="text-xs bg-[#b8860b]/15 dark:bg-[#d4af37]/20 text-[#8c1d1e] dark:text-[#d4af37] font-mono font-bold px-2 py-0.5 rounded-full border border-[#b8860b]/30">
               {cartItems.length}
             </span>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 text-[#d4af37] hover:text-[#f7e7ce] hover:bg-[#d4af37]/10"
+            className="p-1.5 text-[#5c5244] dark:text-[#d4af37] hover:text-[#8c1d1e] dark:hover:text-[#f7e7ce] rounded-full hover:bg-black/5"
             aria-label="Close Bag"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        {/* Content */}
-        {isCheckoutSuccess ? (
-          <div className="p-8 text-center my-auto space-y-4">
-            <div className="w-16 h-16 bg-[#d4af37]/20 border border-[#d4af37] flex items-center justify-center mx-auto text-[#d4af37] animate-bounce">
-              <CheckCircle2 className="w-8 h-8" />
+        {/* Drawer Body: Cart Items List or Empty State */}
+        <div className="flex-1 overflow-y-auto p-5 space-y-4">
+          {isCheckoutSuccess ? (
+            <div className="text-center py-12 space-y-4">
+              <div className="w-16 h-16 bg-emerald-100 dark:bg-emerald-950/80 border border-emerald-500 rounded-full flex items-center justify-center mx-auto text-emerald-600 dark:text-emerald-400">
+                <CheckCircle2 className="w-8 h-8" />
+              </div>
+              <h4 className="text-xl font-serif font-bold text-[#1a1612] dark:text-[#f7e7ce]">
+                VIP Order Request Received!
+              </h4>
+              <p className="text-xs text-[#5c5244] dark:text-[#f7e7ce]/70 leading-relaxed max-w-xs mx-auto">
+                Thank you for selecting Sanjay Jewellers Sariya. Our master jeweler will contact you via WhatsApp for hallmarking verification.
+              </p>
+              <button
+                onClick={() => {
+                  setIsCheckoutSuccess(false);
+                  onClose();
+                }}
+                className="gold-shimmer-btn text-white dark:text-[#05110d] font-bold text-xs uppercase px-6 py-2.5 rounded-xl"
+              >
+                Continue Exploring
+              </button>
             </div>
-            <h4 className="text-2xl font-serif font-light text-[#f7e7ce]">
-              Royal Order Reserved!
-            </h4>
-            <p className="text-xs text-[#f7e7ce]/70 font-sans font-light leading-relaxed">
-              Your order allocation has been secured at Swarna Mahal. Our senior concierge will connect via phone/WhatsApp to arrange insured delivery or boutique pickup.
-            </p>
-            <button
-              onClick={() => {
-                setIsCheckoutSuccess(false);
-                onClose();
-              }}
-              className="bg-[#d4af37] text-[#05110d] hover:bg-[#f7e7ce] font-sans font-bold text-xs uppercase tracking-widest px-6 py-3 transition-colors shadow-lg"
-            >
-              Continue Exploring
-            </button>
-          </div>
-        ) : cartItems.length === 0 ? (
-          <div className="p-12 text-center my-auto space-y-4">
-            <ShoppingBag className="w-12 h-12 text-[#d4af37]/30 mx-auto" />
-            <p className="text-sm font-serif text-[#f7e7ce]/60">{t.empty}</p>
-          </div>
-        ) : (
-          <>
-            {/* Cart Items List */}
-            <div className="flex-1 overflow-y-auto p-5 space-y-4">
-              {cartItems.map((item) => (
-                <div
-                  key={item.product.id}
-                  className="bg-[#0b2239] border border-[#d4af37]/20 p-3 flex gap-3 items-center shadow-md"
-                >
-                  <img
-                    src={item.product.image}
-                    alt={item.product.name[currentLang]}
-                    className="w-16 h-16 object-cover border border-[#d4af37]/30 shrink-0"
-                    referrerPolicy="no-referrer"
-                  />
-                  <div className="flex-1 min-w-0 space-y-1">
-                    <h4 className="text-xs font-serif font-light text-[#f7e7ce] truncate">
+          ) : cartItems.length === 0 ? (
+            <div className="text-center py-16 space-y-3">
+              <div className="w-12 h-12 rounded-full bg-[#f4ebd0] dark:bg-[#d4af37]/10 flex items-center justify-center mx-auto text-[#b8860b] dark:text-[#d4af37]">
+                <ShoppingBag className="w-6 h-6" />
+              </div>
+              <p className="text-sm font-serif text-[#1a1612] dark:text-[#f7e7ce]">
+                {t.empty}
+              </p>
+              <button
+                onClick={onClose}
+                className="text-xs text-[#b8860b] dark:text-[#d4af37] font-bold hover:underline uppercase tracking-wider"
+              >
+                {t.continueShopping} →
+              </button>
+            </div>
+          ) : (
+            cartItems.map((item) => (
+              <div
+                key={item.product.id}
+                className="flex gap-4 p-3.5 bg-[#faf6ee] dark:bg-[#0b2239]/50 border border-[#e6dac1] dark:border-[#d4af37]/20 rounded-2xl shadow-xs"
+              >
+                <img
+                  src={item.product.image}
+                  alt={item.product.name[currentLang]}
+                  className="w-20 h-20 object-cover rounded-xl border border-[#e6dac1] dark:border-[#d4af37]/20"
+                  referrerPolicy="no-referrer"
+                />
+
+                <div className="flex-1 space-y-1">
+                  <div className="flex justify-between items-start">
+                    <h4 className="text-xs font-serif font-bold text-[#1a1612] dark:text-[#f7e7ce] line-clamp-1">
                       {item.product.name[currentLang]}
                     </h4>
-                    <span className="text-[10px] text-[#d4af37] font-mono block">
-                      {item.product.purity} • {item.product.goldWeightGrams}g
-                    </span>
-                    <span className="text-sm font-serif font-light text-[#f7e7ce] block">
-                      ₹{(item.product.price * item.quantity).toLocaleString('en-IN')}
-                    </span>
-                  </div>
-
-                  <div className="flex flex-col items-end gap-2">
                     <button
                       onClick={() => onRemoveItem(item.product.id)}
-                      className="text-[#d4af37]/50 hover:text-rose-400 p-1"
-                      aria-label="Remove item"
+                      className="text-[#5c5244] hover:text-rose-500 p-1"
+                      aria-label="Remove"
                     >
-                      <Trash2 className="w-4 h-4" />
+                      <Trash2 className="w-3.5 h-3.5" />
                     </button>
-                    <div className="flex items-center border border-[#d4af37]/30 bg-[#05110d] px-1.5 py-0.5 text-xs font-mono">
+                  </div>
+
+                  <span className="text-[10px] text-[#8c1d1e] dark:text-[#d4af37] font-mono block font-bold">
+                    {item.product.purity} • {item.product.goldWeightGrams > 0 ? `${item.product.goldWeightGrams}g` : 'Silver'}
+                  </span>
+
+                  <div className="flex items-center justify-between pt-1">
+                    <div className="text-xs font-mono font-bold text-[#8c1d1e] dark:text-[#d4af37]">
+                      ₹{(item.product.price * item.quantity).toLocaleString('en-IN')}
+                    </div>
+
+                    <div className="flex items-center border border-[#e6dac1] dark:border-[#d4af37]/30 rounded-lg bg-white dark:bg-[#05110d]">
                       <button
                         onClick={() => onUpdateQuantity(item.product.id, item.quantity - 1)}
-                        className="px-1 text-[#d4af37] hover:text-[#f7e7ce]"
+                        className="p-1 text-[#5c5244] dark:text-[#d4af37] hover:bg-black/5"
+                        aria-label="Decrease"
                       >
-                        -
+                        <Minus className="w-3 h-3" />
                       </button>
-                      <span className="px-2 text-[#f7e7ce]">{item.quantity}</span>
+                      <span className="px-2 text-xs font-mono font-bold text-[#1a1612] dark:text-[#f7e7ce]">
+                        {item.quantity}
+                      </span>
                       <button
                         onClick={() => onUpdateQuantity(item.product.id, item.quantity + 1)}
-                        className="px-1 text-[#d4af37] hover:text-[#f7e7ce]"
+                        className="p-1 text-[#5c5244] dark:text-[#d4af37] hover:bg-black/5"
+                        aria-label="Increase"
                       >
-                        +
+                        <Plus className="w-3 h-3" />
                       </button>
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))
+          )}
+        </div>
 
-            {/* Footer Summary & Checkout */}
-            <div className="p-5 border-t border-[#d4af37]/20 bg-[#030a08] space-y-4">
-              
-              {/* Voucher Box */}
-              <div className="space-y-1">
-                <div className="flex gap-2">
+        {/* Drawer Footer: Totals & Checkout */}
+        {cartItems.length > 0 && !isCheckoutSuccess && (
+          <div className="p-5 border-t border-[#e6dac1] dark:border-[#d4af37]/20 bg-[#faf6ee] dark:bg-[#030a08] space-y-4">
+            
+            {/* Voucher input */}
+            <div className="space-y-1">
+              <div className="flex gap-2">
+                <div className="relative flex-1">
+                  <Tag className="w-3.5 h-3.5 text-[#b8860b] dark:text-[#d4af37] absolute left-3 top-2.5" />
                   <input
                     type="text"
-                    placeholder={t.voucherPlaceholder}
+                    placeholder="Voucher (e.g. SANJAY1000)"
                     value={voucherCode}
                     onChange={(e) => setVoucherCode(e.target.value)}
-                    className="flex-1 bg-[#05110d] border border-[#d4af37]/30 text-xs px-3 py-2 text-[#f7e7ce] focus:outline-none focus:border-[#d4af37] uppercase font-mono"
+                    className="w-full bg-white dark:bg-[#05110d] border border-[#e6dac1] dark:border-[#d4af37]/40 rounded-xl pl-8 pr-3 py-1.5 text-xs text-[#1a1612] dark:text-[#f7e7ce] uppercase font-mono focus:outline-none focus:border-[#b8860b]"
                   />
-                  <button
-                    onClick={handleApplyVoucher}
-                    className="bg-[#d4af37]/20 border border-[#d4af37]/40 text-[#d4af37] hover:bg-[#d4af37] hover:text-[#05110d] font-sans font-bold text-xs uppercase tracking-wider px-3 py-2 transition-colors"
-                  >
-                    Apply
-                  </button>
                 </div>
-                {voucherDiscount > 0 && (
-                  <span className="text-[10px] text-emerald-400 font-sans font-semibold block">
-                    ✓ {t.discountApplied} (-₹1,000)
-                  </span>
-                )}
-                {voucherError && (
-                  <span className="text-[10px] text-rose-400 block">{voucherError}</span>
-                )}
+                <button
+                  onClick={handleApplyVoucher}
+                  className="bg-[#b8860b] dark:bg-[#d4af37] text-white dark:text-[#05110d] px-3.5 py-1.5 rounded-xl text-xs font-bold font-sans uppercase"
+                >
+                  Apply
+                </button>
               </div>
-
-              {/* Price Breakdown */}
-              <div className="space-y-1.5 text-xs text-[#f7e7ce]/80 border-t border-[#d4af37]/10 pt-3 font-sans">
-                <div className="flex justify-between">
-                  <span>{t.subtotal}</span>
-                  <span className="font-mono">₹{subtotal.toLocaleString('en-IN')}</span>
-                </div>
-                {voucherDiscount > 0 && (
-                  <div className="flex justify-between text-emerald-400 font-semibold">
-                    <span>Royal Voucher Discount:</span>
-                    <span className="font-mono">-₹1,000</span>
-                  </div>
-                )}
-                <div className="flex justify-between text-sm font-bold text-[#f7e7ce] border-t border-[#d4af37]/20 pt-2">
-                  <span>{t.total}</span>
-                  <span className="font-serif font-light text-lg text-[#f7e7ce]">
-                    ₹{grandTotal.toLocaleString('en-IN')}
-                  </span>
-                </div>
-              </div>
-
-              <button
-                onClick={handleSimulateCheckout}
-                className="w-full bg-[#d4af37] text-[#05110d] hover:bg-[#f7e7ce] font-sans font-bold text-xs uppercase tracking-widest py-3.5 transition-colors shadow-xl flex items-center justify-center gap-2"
-              >
-                <span>{t.checkout}</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-
-              <div className="flex items-center justify-center gap-2 text-[10px] text-[#d4af37]/80 font-sans">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#d4af37]" />
-                <span>Insured Doorstep Express Delivery Included</span>
-              </div>
-
+              {voucherError && <span className="text-[10px] text-rose-500 font-mono block">{voucherError}</span>}
+              {voucherDiscount > 0 && (
+                <span className="text-[10px] text-emerald-600 font-mono font-bold block">
+                  ✓ ₹{voucherDiscount} Royal Privilege Discount Applied!
+                </span>
+              )}
             </div>
-          </>
+
+            {/* Calculations */}
+            <div className="space-y-1.5 text-xs font-sans text-[#5c5244] dark:text-[#f7e7ce]/80 pt-1">
+              <div className="flex justify-between">
+                <span>{t.subtotal}:</span>
+                <span className="font-mono font-bold text-[#1a1612] dark:text-[#f7e7ce]">₹{subtotal.toLocaleString('en-IN')}</span>
+              </div>
+              {voucherDiscount > 0 && (
+                <div className="flex justify-between text-emerald-600 font-bold">
+                  <span>Voucher Discount:</span>
+                  <span className="font-mono">-₹{voucherDiscount.toLocaleString('en-IN')}</span>
+                </div>
+              )}
+              <div className="flex justify-between border-t border-[#e6dac1] dark:border-[#d4af37]/20 pt-2 text-sm font-bold text-[#1a1612] dark:text-[#f7e7ce]">
+                <span>{t.grandTotal}:</span>
+                <span className="font-mono text-base text-[#8c1d1e] dark:text-[#d4af37]">₹{grandTotal.toLocaleString('en-IN')}</span>
+              </div>
+            </div>
+
+            {/* Checkout CTA */}
+            <button
+              onClick={handleSimulateCheckout}
+              className="w-full gold-shimmer-btn text-white dark:text-[#05110d] font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl shadow-xl flex items-center justify-center gap-2"
+            >
+              <span>{t.checkout}</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+
+            <div className="flex items-center justify-center gap-1.5 text-[10px] text-[#5c5244] dark:text-[#f7e7ce]/60">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#b8860b] dark:text-[#d4af37]" />
+              <span>100% Insured Delivery & Store Pickup in Sariya</span>
+            </div>
+
+          </div>
         )}
 
       </div>
