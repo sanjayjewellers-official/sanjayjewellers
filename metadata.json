@@ -1,0 +1,6 @@
+{
+  "name": "Sanjay Jewellers Sariya",
+  "description": "Sanjay Jewellers Sariya - 30 Years of Trust & Heritage. Traditional Indian Gold and Silver Jewellery, Sone-Chandi ke Abhushan, 22K/24K Gold & 999 Fine Silver with live rate estimator.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
