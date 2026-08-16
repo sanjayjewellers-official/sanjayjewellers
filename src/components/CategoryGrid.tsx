@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Sparkles, ArrowUpRight, Compass } from 'lucide-react';
+import { ArrowUpRight, Compass } from 'lucide-react';
 import { Language, Product } from '../types';
 import { translations } from '../data/translations';
 
@@ -60,21 +60,21 @@ export const CategoryGrid: React.FC<CategoryGridProps> = ({
   ];
 
   return (
-    <section id="categories" className="py-20 bg-white dark:bg-[#000000] relative text-[#1a1612] dark:text-[#fde047] transition-colors duration-400 border-t border-[#e6dac1] dark:border-[#d4af37]/30">
+    <section id="categories" className="py-20 bg-white dark:bg-[#0a0806] relative text-[#1a1612] dark:text-[#f7e7ce] transition-colors duration-400 border-t border-[#e6dac1] dark:border-[#d4af37]/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-12 space-y-12">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f4ebd0] dark:bg-[#1f190e] border border-[#b8860b]/30 dark:border-[#d4af37]/50 text-[#8c1d1e] dark:text-[#fde047] text-[10px] font-sans font-bold uppercase tracking-[0.3em]">
-            <Compass className="w-3.5 h-3.5 text-[#b8860b] dark:text-[#fde047]" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f4ebd0] dark:bg-[#1a1408] border border-[#b8860b]/30 dark:border-[#d4af37]/50 text-[#8c1d1e] dark:text-[#d4af37] text-[10px] font-sans font-bold uppercase tracking-[0.3em]">
+            <Compass className="w-3.5 h-3.5 text-[#b8860b] dark:text-[#d4af37]" />
             <span>{t.badge}</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-serif font-bold text-[#1a1612] dark:text-[#fde047]">
+          <h2 className="text-3xl sm:text-5xl font-serif font-bold text-[#1a1612] dark:text-[#f7e7ce]">
             {t.title}
           </h2>
 
-          <p className="text-xs sm:text-sm text-[#5c5244] dark:text-[#d4af37] font-sans font-light tracking-wide">
+          <p className="text-xs sm:text-sm text-[#4a3e31] dark:text-[#d4af37] font-sans font-light tracking-wide">
             {t.subtitle}
           </p>
         </div>
@@ -89,7 +89,7 @@ export const CategoryGrid: React.FC<CategoryGridProps> = ({
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
               onClick={() => onSelectCategory(cat.id)}
-              className={`group relative overflow-hidden cursor-pointer border-2 border-[#e6dac1] dark:border-[#d4af37]/40 rounded-3xl shadow-xl bg-[#000000] ${cat.span}`}
+              className={`group relative overflow-hidden cursor-pointer border-2 border-[#e6dac1] dark:border-[#d4af37]/30 rounded-3xl shadow-xl bg-[#1c150c] ${cat.span}`}
             >
               <img
                 src={cat.image}
@@ -98,7 +98,7 @@ export const CategoryGrid: React.FC<CategoryGridProps> = ({
                 referrerPolicy="no-referrer"
               />
               
-              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent opacity-95 group-hover:opacity-85 transition-opacity" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-90 group-hover:opacity-80 transition-opacity" />
 
               <div className="absolute inset-0 p-6 flex flex-col justify-between text-white">
                 <div className="flex justify-between items-start">
@@ -108,19 +108,19 @@ export const CategoryGrid: React.FC<CategoryGridProps> = ({
                     </span>
                   ) : <div />}
 
-                  <div className="w-10 h-10 rounded-full bg-white/20 dark:bg-[#000000]/90 border border-white/40 dark:border-[#fde047]/50 flex items-center justify-center group-hover:bg-[#fde047] group-hover:text-[#000000] transition-colors shadow-lg">
-                    <ArrowUpRight className="w-5 h-5 text-[#fde047] group-hover:text-black" />
+                  <div className="w-10 h-10 rounded-full bg-white/20 dark:bg-black/60 border border-white/40 dark:border-[#d4af37]/40 flex items-center justify-center group-hover:bg-[#d4af37] group-hover:text-[#0a0806] transition-colors shadow-lg">
+                    <ArrowUpRight className="w-5 h-5 text-white group-hover:text-black" />
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
-                  <span className="text-[10px] font-sans font-bold text-[#fde047] uppercase tracking-widest bg-black/80 px-2.5 py-1 rounded-md border border-[#d4af37]/50 inline-block">
+                  <span className="text-[10px] font-sans font-bold text-[#d4af37] uppercase tracking-widest bg-black/60 px-2.5 py-1 rounded-md border border-[#d4af37]/30 inline-block">
                     {cat.count}+ Designs
                   </span>
-                  <h3 className="text-xl sm:text-2xl font-serif font-bold text-white dark:text-[#fde047] group-hover:text-[#ffffff] transition-colors">
+                  <h3 className="text-xl sm:text-2xl font-serif font-bold text-white group-hover:text-[#d4af37] transition-colors">
                     {cat.title}
                   </h3>
-                  <span className="text-[11px] font-sans text-[#fde047] group-hover:underline flex items-center gap-1 uppercase tracking-widest font-bold">
+                  <span className="text-[11px] font-sans text-[#d4af37] group-hover:underline flex items-center gap-1 uppercase tracking-widest font-bold">
                     {t.viewAll} →
                   </span>
                 </div>

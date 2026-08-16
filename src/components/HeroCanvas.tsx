@@ -184,7 +184,7 @@ export const HeroCanvas: React.FC<HeroCanvasProps> = ({
           transition={{ duration: 0.7, delay: 0.2 }}
           className="space-y-1 sm:space-y-2"
         >
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif font-bold tracking-tight text-[#1a1612] dark:text-[#fde047] leading-[1.08]">
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif font-bold tracking-tight text-[#1a1612] dark:text-[#f7e7ce] leading-[1.08]">
             {t.titleLine1}
           </h1>
           <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif italic text-[#8c1d1e] dark:text-[#d4af37] font-normal tracking-wide">
@@ -197,7 +197,7 @@ export const HeroCanvas: React.FC<HeroCanvasProps> = ({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="max-w-xl mx-auto text-sm sm:text-base text-[#5c5244] dark:text-[#fde047] font-sans font-normal tracking-wide leading-relaxed"
+          className="max-w-xl mx-auto text-sm sm:text-base text-[#4a3e31] dark:text-[#d4af37] font-sans font-normal tracking-wide leading-relaxed"
         >
           {t.subtitle}
         </motion.p>

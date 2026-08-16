@@ -25,9 +25,9 @@ export default function App() {
   const [currentTheme, setCurrentTheme] = useState<Theme>(() => {
     try {
       const saved = localStorage.getItem('swarna_theme');
-      return (saved as Theme) || 'dark';
+      return (saved as Theme) || 'light';
     } catch {
-      return 'dark';
+      return 'light';
     }
   });
 

@@ -47,25 +47,25 @@ export const PrimeCollection: React.FC<PrimeCollectionProps> = ({
   });
 
   return (
-    <section id="prime-collection" className="py-20 bg-[#faf7f0] dark:bg-[#000000] relative overflow-hidden text-[#1a1612] dark:text-[#fde047] transition-colors duration-400 border-t border-[#ebdcc9] dark:border-[#d4af37]/30">
+    <section id="prime-collection" className="py-20 bg-white dark:bg-[#0a0806] relative overflow-hidden text-[#1a1612] dark:text-[#f7e7ce] transition-colors duration-400 border-t border-[#ebdcc9] dark:border-[#d4af37]/30">
       
       {/* Decorative Immersive Pattern Backdrop */}
-      <div className="absolute inset-0 opacity-5 bg-[radial-gradient(#b8860b_1px,transparent_1px)] dark:bg-[radial-gradient(#fde047_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
+      <div className="absolute inset-0 opacity-5 bg-[radial-gradient(#b8860b_1px,transparent_1px)] dark:bg-[radial-gradient(#d4af37_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-12 relative z-10 space-y-12">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f4ebd0] dark:bg-[#1f190e] border border-[#b8860b]/30 dark:border-[#d4af37]/50 text-[#8c1d1e] dark:text-[#fde047] text-[10px] font-sans font-bold uppercase tracking-[0.3em] shadow-sm">
-            <Crown className="w-3.5 h-3.5 text-[#b8860b] dark:text-[#fde047]" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f4ebd0] dark:bg-[#1a1408] border border-[#b8860b]/30 dark:border-[#d4af37]/50 text-[#8c1d1e] dark:text-[#d4af37] text-[10px] font-sans font-bold uppercase tracking-[0.3em] shadow-sm">
+            <Crown className="w-3.5 h-3.5 text-[#b8860b] dark:text-[#d4af37]" />
             <span>{t.badge}</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-serif font-bold text-[#1a1612] dark:text-[#fde047]">
+          <h2 className="text-3xl sm:text-5xl font-serif font-bold text-[#1a1612] dark:text-[#f7e7ce]">
             {t.title}
           </h2>
 
-          <p className="text-xs sm:text-sm text-[#5c5244] dark:text-[#d4af37] font-sans font-normal max-w-xl mx-auto leading-relaxed">
+          <p className="text-xs sm:text-sm text-[#4a3e31] dark:text-[#d4af37] font-sans font-normal max-w-xl mx-auto leading-relaxed">
             {t.subtitle}
           </p>
         </div>
@@ -85,8 +85,8 @@ export const PrimeCollection: React.FC<PrimeCollectionProps> = ({
               onClick={() => setActiveFilter(tab.id as any)}
               className={`px-4 sm:px-5 py-2 rounded-full text-xs font-sans font-bold transition-all duration-300 ${
                 activeFilter === tab.id
-                  ? 'bg-[#b8860b] dark:bg-[#d4af37] text-white dark:text-[#000000] shadow-lg scale-105'
-                  : 'bg-white dark:bg-[#0a0805] border border-[#e6dac1] dark:border-[#d4af37]/40 text-[#4d4030] dark:text-[#d4af37] hover:border-[#b8860b] dark:hover:border-[#fde047]'
+                  ? 'bg-[#b8860b] dark:bg-[#d4af37] text-white dark:text-[#0a0806] shadow-lg scale-105'
+                  : 'bg-[#faf6ee] dark:bg-[#15100b] border border-[#e6dac1] dark:border-[#d4af37]/30 text-[#4a3e31] dark:text-[#d4af37] hover:border-[#b8860b]'
               }`}
             >
               {tab.label}
@@ -106,7 +106,7 @@ export const PrimeCollection: React.FC<PrimeCollectionProps> = ({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
-                className="group relative bg-white dark:bg-[#080604] border-2 border-[#e6dac1] dark:border-[#d4af37]/40 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 card-3d-glow flex flex-col justify-between"
+                className="group relative bg-[#faf6ee] dark:bg-[#120e0a] border-2 border-[#e6dac1] dark:border-[#d4af37]/30 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 card-3d-glow flex flex-col justify-between"
               >
                 {/* Product Image & Overlays */}
                 <div className="relative aspect-[4/3] overflow-hidden bg-black/5">
@@ -137,7 +137,7 @@ export const PrimeCollection: React.FC<PrimeCollectionProps> = ({
                     className={`absolute top-4 right-4 p-2.5 rounded-full border backdrop-blur-md transition-all duration-300 shadow-lg ${
                       isWishlisted
                         ? 'bg-rose-600 text-white border-rose-500'
-                        : 'bg-white/80 dark:bg-black/80 text-[#1a1612] dark:text-[#fde047] border-[#e6dac1] dark:border-[#d4af37]/50 hover:text-[#b8860b]'
+                        : 'bg-white/80 dark:bg-black/80 text-[#1a1612] dark:text-[#f7e7ce] border-[#e6dac1] dark:border-[#d4af37]/50 hover:text-[#b8860b]'
                     }`}
                     aria-label="Wishlist"
                   >
@@ -148,14 +148,14 @@ export const PrimeCollection: React.FC<PrimeCollectionProps> = ({
                   <div className="absolute bottom-4 inset-x-4 flex items-center gap-2">
                     <button
                       onClick={() => onQuickView(product)}
-                      className="flex-1 bg-white/90 dark:bg-black/90 backdrop-blur-md text-[#1a1612] dark:text-[#fde047] border border-[#b8860b]/40 dark:border-[#d4af37]/50 text-xs font-bold py-2 px-3 rounded-xl flex items-center justify-center gap-1.5 hover:bg-[#f4ebd0] dark:hover:bg-[#d4af37]/30 transition-all shadow-lg font-sans"
+                      className="flex-1 bg-white/90 dark:bg-black/90 backdrop-blur-md text-[#1a1612] dark:text-[#f7e7ce] border border-[#b8860b]/40 dark:border-[#d4af37]/50 text-xs font-bold py-2 px-3 rounded-xl flex items-center justify-center gap-1.5 hover:bg-[#f4ebd0] dark:hover:bg-[#d4af37]/30 transition-all shadow-lg font-sans"
                     >
-                      <Eye className="w-3.5 h-3.5 text-[#b8860b] dark:text-[#fde047]" />
+                      <Eye className="w-3.5 h-3.5 text-[#b8860b] dark:text-[#d4af37]" />
                       <span>{t.quickView}</span>
                     </button>
                     <button
                       onClick={() => onTryOn(product)}
-                      className="flex-1 bg-[#b8860b] dark:bg-[#d4af37] text-white dark:text-black text-xs font-bold py-2 px-3 rounded-xl flex items-center justify-center gap-1.5 hover:bg-[#8c1d1e] dark:hover:bg-[#fde047] transition-all shadow-lg font-sans"
+                      className="flex-1 bg-[#b8860b] dark:bg-[#d4af37] text-white dark:text-black text-xs font-bold py-2 px-3 rounded-xl flex items-center justify-center gap-1.5 hover:bg-[#8c1d1e] dark:hover:bg-[#f7e7ce] transition-all shadow-lg font-sans"
                     >
                       <Sparkles className="w-3.5 h-3.5" />
                       <span>{t.tryOn}</span>
@@ -166,19 +166,19 @@ export const PrimeCollection: React.FC<PrimeCollectionProps> = ({
                 {/* Card Information */}
                 <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
                   <div className="space-y-2">
-                    <div className="flex items-center justify-between text-xs font-mono text-[#5c5244] dark:text-[#d4af37]">
+                    <div className="flex items-center justify-between text-xs font-mono text-[#4a3e31] dark:text-[#d4af37]">
                       <span className="font-bold tracking-wider">{product.hallmarkCode}</span>
-                      <span className="flex items-center gap-1 text-amber-500 dark:text-[#fde047] font-bold">
+                      <span className="flex items-center gap-1 text-amber-500 font-bold">
                         <Star className="w-3.5 h-3.5 fill-current" />
                         {product.rating} ({product.reviewCount})
                       </span>
                     </div>
 
-                    <h3 className="text-xl font-serif font-bold text-[#1a1612] dark:text-[#fde047] group-hover:text-[#b8860b] dark:group-hover:text-[#fde047] transition-colors leading-tight">
+                    <h3 className="text-xl font-serif font-bold text-[#1a1612] dark:text-[#f7e7ce] group-hover:text-[#b8860b] dark:group-hover:text-[#d4af37] transition-colors leading-tight">
                       {product.name[currentLang]}
                     </h3>
 
-                    <p className="text-xs text-[#5c5244] dark:text-[#d4af37] font-sans font-light leading-relaxed line-clamp-2">
+                    <p className="text-xs text-[#4a3e31] dark:text-[#d4af37] font-sans font-light leading-relaxed line-clamp-2">
                       {product.subtitle[currentLang]}
                     </p>
                   </div>
@@ -186,17 +186,17 @@ export const PrimeCollection: React.FC<PrimeCollectionProps> = ({
                   {/* Price & Add to Bag CTA */}
                   <div className="pt-4 border-t border-[#e6dac1] dark:border-[#d4af37]/30 flex items-center justify-between">
                     <div>
-                      <span className="text-[10px] text-[#5c5244] dark:text-[#d4af37] uppercase tracking-widest font-sans block">
+                      <span className="text-[10px] text-[#756755] dark:text-[#d4af37] uppercase tracking-widest font-sans block">
                         Estimated Value (incl. GST)
                       </span>
-                      <div className="text-xl sm:text-2xl font-serif font-bold text-[#8c1d1e] dark:text-[#fde047]">
+                      <div className="text-xl sm:text-2xl font-serif font-bold text-[#8c1d1e] dark:text-[#d4af37]">
                         ₹{product.price.toLocaleString('en-IN')}
                       </div>
                     </div>
 
                     <button
                       onClick={() => onAddToCart(product)}
-                      className="gold-shimmer-btn p-3 rounded-2xl shadow-lg flex items-center justify-center text-white dark:text-[#000000]"
+                      className="gold-shimmer-btn p-3 rounded-2xl shadow-lg flex items-center justify-center text-white dark:text-[#0a0806]"
                       title={t.addToBag}
                     >
                       <ShoppingBag className="w-5 h-5" />
