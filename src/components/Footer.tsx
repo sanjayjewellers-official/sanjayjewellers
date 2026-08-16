@@ -118,24 +118,29 @@ export const Footer: React.FC<FooterProps> = ({
         {/* Flagship Boutiques */}
         <div className="space-y-3">
           <h4 className="font-serif font-light text-[#d4af37] uppercase tracking-widest text-sm">
-            {t.boutiques}
+            {t.boutiques} (Sariya Branches)
           </h4>
-          <ul className="space-y-2.5 text-[#f7e7ce]/70 font-light">
-            <li className="flex items-start gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-[#d4af37] shrink-0 mt-0.5" />
-              <span>Bhubaneswar: Janpath, Saheed Nagar</span>
+          <ul className="space-y-3 text-[#f7e7ce]/80 font-light">
+            <li className="flex items-start gap-2">
+              <MapPin className="w-4 h-4 text-[#d4af37] shrink-0 mt-0.5" />
+              <div>
+                <strong className="text-white block font-medium">Main Branch:</strong>
+                <span>Main Road Gandhi Chowk, Sariya, Chhattisgarh</span>
+              </div>
             </li>
-            <li className="flex items-start gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-[#d4af37] shrink-0 mt-0.5" />
-              <span>Mumbai: Opera House, South Mumbai</span>
+            <li className="flex items-start gap-2">
+              <MapPin className="w-4 h-4 text-[#d4af37] shrink-0 mt-0.5" />
+              <div>
+                <strong className="text-white block font-medium">Heritage Branch:</strong>
+                <span>Near Hanuman Mandir, Basti Sariya, Chhattisgarh</span>
+              </div>
             </li>
-            <li className="flex items-start gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-[#d4af37] shrink-0 mt-0.5" />
-              <span>Delhi: South Extension Part 1</span>
-            </li>
-            <li className="flex items-start gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-[#d4af37] shrink-0 mt-0.5" />
-              <span>Jaipur: Johari Bazaar Heritage Palace</span>
+            <li className="flex items-start gap-2">
+              <MapPin className="w-4 h-4 text-[#d4af37] shrink-0 mt-0.5" />
+              <div>
+                <strong className="text-white block font-medium">Boutique Branch:</strong>
+                <span>Atal Chowk, Sariya, Chhattisgarh</span>
+              </div>
             </li>
           </ul>
         </div>

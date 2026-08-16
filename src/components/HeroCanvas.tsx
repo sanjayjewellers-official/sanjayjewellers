@@ -108,14 +108,14 @@ export const HeroCanvas: React.FC<HeroCanvasProps> = ({
   }, []);
 
   return (
-    <section className="relative min-h-[92vh] flex items-center justify-center pt-40 sm:pt-44 pb-16 overflow-hidden bg-[#faf7f0] dark:bg-[#05110d] text-[#1a1612] dark:text-[#f7e7ce] transition-colors duration-400">
+    <section className="relative min-h-[75vh] sm:min-h-[82vh] flex items-center justify-center pt-8 sm:pt-12 pb-8 sm:pb-12 overflow-hidden bg-[#faf7f0] dark:bg-[#080706] text-[#1a1612] dark:text-[#f7e7ce] transition-colors duration-400">
       
       {/* Immersive UI Radial Gradient Atmosphere */}
       <div className="absolute inset-0 opacity-30 dark:opacity-40 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 20% 30%, rgba(212,175,55,0.15) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(184,134,11,0.12) 0%, transparent 50%)' }} />
 
       {/* Decorative Ambient Blurs */}
-      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#d4af37] opacity-[0.08] dark:opacity-[0.05] blur-[120px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-[#b8860b] opacity-[0.08] blur-[100px] rounded-full pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[350px] h-[350px] bg-[#d4af37] opacity-[0.08] dark:opacity-[0.05] blur-[100px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[250px] h-[250px] bg-[#b8860b] opacity-[0.08] blur-[90px] rounded-full pointer-events-none" />
 
       {/* Background Image with Theme Vignette */}
       <div className="absolute inset-0 z-0 opacity-15 dark:opacity-25">
@@ -125,7 +125,7 @@ export const HeroCanvas: React.FC<HeroCanvasProps> = ({
           className="w-full h-full object-cover object-center scale-105 filter contrast-110"
           referrerPolicy="no-referrer"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#faf7f0] dark:from-[#05110d] via-[#faf7f0]/80 dark:via-[#05110d]/80 to-[#faf7f0]/95 dark:to-[#05110d]/90" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#faf7f0] dark:from-[#080706] via-[#faf7f0]/80 dark:via-[#080706]/80 to-[#faf7f0]/95 dark:to-[#080706]/90" />
       </div>
 
       {/* Floating Sparkle Canvas */}
@@ -135,40 +135,59 @@ export const HeroCanvas: React.FC<HeroCanvasProps> = ({
       />
 
       {/* Hero Content Box */}
-      <div className="relative z-20 max-w-5xl mx-auto px-4 sm:px-12 text-center space-y-8">
+      <div className="relative z-20 max-w-5xl mx-auto px-4 sm:px-8 text-center space-y-5 sm:space-y-6">
         
-        {/* Imperial Eyebrow & Brand Heritage Badge */}
+        {/* Animated 30 Years of Trust Heritage Highlight Badge */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="inline-flex flex-col items-center justify-center gap-3"
+          transition={{ duration: 0.6 }}
+          className="inline-flex flex-col items-center justify-center gap-2"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f4ebd0] dark:bg-[#d4af37]/15 border border-[#b8860b]/40 dark:border-[#d4af37]/40 text-[#8c1d1e] dark:text-[#d4af37] text-[11px] font-sans font-bold uppercase tracking-[0.25em] shadow-md">
-            <Award className="w-3.5 h-3.5 text-[#b8860b] dark:text-[#d4af37]" />
-            <span>SANJAY JEWELLERS SARIYA • 30 YEARS OF TRUST & HERITAGE</span>
-          </div>
+          <motion.div
+            animate={{
+              boxShadow: [
+                '0 0 10px rgba(212,175,55,0.2)',
+                '0 0 25px rgba(212,175,55,0.55)',
+                '0 0 10px rgba(212,175,55,0.2)'
+              ]
+            }}
+            transition={{ repeat: Infinity, duration: 3, ease: 'easeInOut' }}
+            className="relative inline-flex items-center gap-2 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full bg-gradient-to-r from-[#fef3c7] via-[#fffbeb] to-[#fef3c7] dark:from-[#241a0e] dark:via-[#382813] dark:to-[#241a0e] border-2 border-[#b8860b] dark:border-[#fde047] text-[#8c1d1e] dark:text-[#fde047] text-[10px] sm:text-xs font-sans font-extrabold uppercase tracking-[0.2em] shadow-lg overflow-hidden"
+          >
+            {/* Animated gold light sweep shine */}
+            <motion.div
+              animate={{ x: ['-100%', '250%'] }}
+              transition={{ repeat: Infinity, duration: 3, ease: 'easeInOut', repeatDelay: 1 }}
+              className="absolute inset-0 w-1/3 bg-gradient-to-r from-transparent via-white/50 dark:via-[#fde047]/35 to-transparent skew-x-12 pointer-events-none"
+            />
+            <Crown className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#b8860b] dark:text-[#fde047] shrink-0 animate-bounce" />
+            <span className="relative z-10 font-serif tracking-wider drop-shadow-xs">
+              SANJAY JEWELLERS SARIYA • 30 YEARS OF TRUST & HERITAGE
+            </span>
+            <Sparkles className="w-3.5 h-3.5 text-[#b8860b] dark:text-[#fde047] shrink-0 animate-pulse" />
+          </motion.div>
 
-          <div className="inline-flex items-center gap-4">
-            <div className="h-[1px] w-12 bg-[#b8860b] dark:bg-[#d4af37]" />
-            <span className="text-[10px] uppercase tracking-[0.35em] font-sans text-[#b8860b] dark:text-[#d4af37] font-bold">
+          <div className="inline-flex items-center gap-3">
+            <div className="h-[1px] w-8 sm:w-12 bg-[#b8860b] dark:bg-[#d4af37]" />
+            <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.3em] font-sans text-[#b8860b] dark:text-[#d4af37] font-bold">
               {t.tag}
             </span>
-            <div className="h-[1px] w-12 bg-[#b8860b] dark:bg-[#d4af37]" />
+            <div className="h-[1px] w-8 sm:w-12 bg-[#b8860b] dark:bg-[#d4af37]" />
           </div>
         </motion.div>
 
         {/* Immersive Theme Title */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.2 }}
-          className="space-y-2"
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="space-y-1 sm:space-y-2"
         >
-          <h1 className="text-5xl sm:text-7xl md:text-8xl font-serif font-bold tracking-tight text-[#1a1612] dark:text-[#f7e7ce] leading-[1.05]">
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif font-bold tracking-tight text-[#1a1612] dark:text-[#f7e7ce] leading-[1.08]">
             {t.titleLine1}
           </h1>
-          <h2 className="text-4xl sm:text-6xl md:text-7xl font-serif italic text-[#8c1d1e] dark:text-[#d4af37] font-normal tracking-wide">
+          <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif italic text-[#8c1d1e] dark:text-[#d4af37] font-normal tracking-wide">
             {t.titleLine2}
           </h2>
         </motion.div>

@@ -203,7 +203,7 @@ export default function App() {
       />
 
       {/* Main Content Sections */}
-      <main className="pt-20">
+      <main className="pt-14 sm:pt-16 pb-16 lg:pb-0">
         {currentPage === 'home' ? (
           <>
             {/* Hero Section with Canvas Particle Sparkles */}
@@ -352,6 +352,77 @@ export default function App() {
         onSelectProduct={(p) => setQuickViewProduct(p)}
         onAddToCart={handleAddToCart}
       />
+
+      {/* Luxury Mobile Bottom Sticky Navigation Bar (Native App Feel) */}
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-[#110e0c]/95 backdrop-blur-xl border-t border-[#ebdcc9] dark:border-[#382f25] px-2 py-1.5 shadow-[0_-4px_20px_rgba(0,0,0,0.1)]">
+        <div className="grid grid-cols-5 gap-1 items-center max-w-md mx-auto text-center">
+          
+          {/* Home */}
+          <button
+            onClick={() => handleNavigatePage('home')}
+            className={`flex flex-col items-center justify-center py-1 rounded-xl transition-colors ${
+              currentPage === 'home'
+                ? 'text-[#8c1d1e] dark:text-[#d4af37] font-bold'
+                : 'text-[#6c6152] dark:text-[#a89d8d]'
+            }`}
+          >
+            <span className="text-base leading-none">🏰</span>
+            <span className="text-[10px] tracking-tight mt-0.5">Home</span>
+          </button>
+
+          {/* Dedicated Shop Boutique */}
+          <button
+            onClick={() => handleNavigatePage('shop', 'all')}
+            className={`flex flex-col items-center justify-center py-1 rounded-xl transition-colors relative ${
+              currentPage === 'shop'
+                ? 'text-[#b45309] dark:text-[#fde047] font-bold'
+                : 'text-[#6c6152] dark:text-[#a89d8d]'
+            }`}
+          >
+            <span className="text-base leading-none">🛍️</span>
+            <span className="text-[10px] tracking-tight mt-0.5">Shop All</span>
+            <span className="absolute top-0 right-3 w-2 h-2 rounded-full bg-[#8c1d1e] animate-ping" />
+          </button>
+
+          {/* Search */}
+          <button
+            onClick={() => setIsSearchOpen(true)}
+            className="flex flex-col items-center justify-center py-1 rounded-xl text-[#6c6152] dark:text-[#a89d8d]"
+          >
+            <span className="text-base leading-none">🔍</span>
+            <span className="text-[10px] tracking-tight mt-0.5">Search</span>
+          </button>
+
+          {/* Wishlist */}
+          <button
+            onClick={() => setIsWishlistOpen(true)}
+            className="flex flex-col items-center justify-center py-1 rounded-xl text-[#6c6152] dark:text-[#a89d8d] relative"
+          >
+            <span className="text-base leading-none">❤️</span>
+            <span className="text-[10px] tracking-tight mt-0.5">Wishlist</span>
+            {wishlist.length > 0 && (
+              <span className="absolute top-0 right-3 bg-[#b8860b] text-white text-[9px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center">
+                {wishlist.length}
+              </span>
+            )}
+          </button>
+
+          {/* Cart Bag */}
+          <button
+            onClick={() => setIsCartOpen(true)}
+            className="flex flex-col items-center justify-center py-1 rounded-xl text-[#6c6152] dark:text-[#a89d8d] relative"
+          >
+            <span className="text-base leading-none">👜</span>
+            <span className="text-[10px] tracking-tight mt-0.5">Bag</span>
+            {totalCartCount > 0 && (
+              <span className="absolute top-0 right-3 bg-[#8c1d1e] text-white text-[9px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center">
+                {totalCartCount}
+              </span>
+            )}
+          </button>
+
+        </div>
+      </div>
 
     </div>
   );

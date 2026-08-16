@@ -145,10 +145,10 @@ export const VIPBookingModal: React.FC<VIPBookingModalProps> = ({
                   onChange={(e) => setForm({ ...form, preferredCity: e.target.value })}
                   className="w-full bg-[#faf6ee] dark:bg-[#02120d] border border-[#e6dac1] dark:border-amber-500/30 rounded-xl px-4 py-2.5 text-[#1a1612] dark:text-amber-100 focus:outline-none focus:border-[#b8860b]"
                 >
-                  <option value="Sariya Showroom">Sariya Main Boutique</option>
-                  <option value="Bhubaneswar">Bhubaneswar Private Suite</option>
-                  <option value="Raigarh">Raigarh / Bilaspur</option>
-                  <option value="Home Trial">VIP Doorstep Home Trial</option>
+                  <option value="Main Road Gandhi Chowk Sariya">Main Road Gandhi Chowk, Sariya, Chhattisgarh</option>
+                  <option value="Hanuman Mandir Basti Sariya">Near Hanuman Mandir, Basti Sariya, Chhattisgarh</option>
+                  <option value="Atal Chowk Sariya">Atal Chowk, Sariya, Chhattisgarh</option>
+                  <option value="VIP Doorstep Home Trial">VIP Doorstep Home Trial (Sariya & nearby)</option>
                 </select>
               </div>
 
