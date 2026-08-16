@@ -8,12 +8,14 @@ interface HeroCanvasProps {
   currentLang: Language;
   onOpenTryOn: () => void;
   onOpenBooking: () => void;
+  onOpenShop?: () => void;
 }
 
 export const HeroCanvas: React.FC<HeroCanvasProps> = ({
   currentLang,
   onOpenTryOn,
   onOpenBooking,
+  onOpenShop,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const t = translations[currentLang].hero;
@@ -188,8 +190,14 @@ export const HeroCanvas: React.FC<HeroCanvasProps> = ({
           transition={{ duration: 0.8, delay: 0.6 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-5 pt-4"
         >
-          <a
-            href="#sone-chandi-catalog"
+          <button
+            onClick={() => {
+              if (onOpenShop) onOpenShop();
+              else {
+                const el = document.getElementById('sone-chandi-catalog');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
             className="group flex items-center gap-3 w-fit"
           >
             <div className="bg-[#b8860b] dark:bg-[#d4af37] text-white dark:text-[#05110d] px-8 sm:px-10 py-4 text-xs font-bold font-sans uppercase tracking-[0.2em] hover:bg-[#8c1d1e] dark:hover:bg-[#f7e7ce] transition-colors shadow-xl rounded-l-md">
@@ -198,7 +206,7 @@ export const HeroCanvas: React.FC<HeroCanvasProps> = ({
             <div className="w-12 h-12 rounded-r-md bg-[#8c1d1e] dark:bg-[#b8860b] text-white flex items-center justify-center group-hover:bg-[#1a1612] transition-colors shadow-xl">
               <ArrowRight className="w-4 h-4" />
             </div>
-          </a>
+          </button>
 
           <button
             onClick={onOpenTryOn}

@@ -35,6 +35,8 @@ interface HeaderProps {
   onOpenBooking: () => void;
   onOpenSearch: () => void;
   metalRate: MetalRate;
+  currentPage?: 'home' | 'shop';
+  onNavigatePage?: (page: 'home' | 'shop', category?: string) => void;
   onSelectMainCategory?: (category: string) => void;
 }
 
@@ -50,6 +52,8 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenBooking,
   onOpenSearch,
   metalRate,
+  currentPage = 'home',
+  onNavigatePage,
   onSelectMainCategory
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -146,7 +150,9 @@ export const Header: React.FC<HeaderProps> = ({
   const handleCategorySelect = (catId: string) => {
     setCategoryDropdownOpen(false);
     setMobileMenuOpen(false);
-    if (onSelectMainCategory) {
+    if (onNavigatePage) {
+      onNavigatePage('shop', catId);
+    } else if (onSelectMainCategory) {
       onSelectMainCategory(catId);
     }
   };
@@ -283,12 +289,35 @@ export const Header: React.FC<HeaderProps> = ({
           </a>
 
           {/* Desktop Nav Items */}
-          <nav className="hidden lg:flex items-center gap-7 text-[11px] uppercase tracking-widest font-sans font-semibold text-[#5c5244] dark:text-[#d4af37]/90">
+          <nav className="hidden lg:flex items-center gap-6 text-[11px] uppercase tracking-widest font-sans font-semibold text-[#5c5244] dark:text-[#d4af37]/90">
             
-            {/* Prime Collection Link */}
-            <a href="#prime-collection" className="hover:text-[#b8860b] dark:hover:text-[#f7e7ce] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-[#b8860b] dark:after:bg-[#d4af37] hover:after:w-full after:transition-all">
-              {t.primeCollection}
-            </a>
+            {/* Home Button */}
+            <button 
+              onClick={() => onNavigatePage?.('home')}
+              className={`hover:text-[#b8860b] dark:hover:text-[#f7e7ce] transition-colors relative py-1 ${
+                currentPage === 'home' 
+                  ? 'text-[#8c1d1e] dark:text-[#d4af37] font-bold border-b-2 border-[#b8860b] dark:border-[#d4af37]' 
+                  : ''
+              }`}
+            >
+              {t.home}
+            </button>
+
+            {/* Dedicated Shop Now Boutique Button */}
+            <button 
+              onClick={() => onNavigatePage?.('shop', 'all')}
+              className={`px-3.5 py-1.5 rounded-full font-bold transition-all flex items-center gap-1.5 border shadow-sm ${
+                currentPage === 'shop'
+                  ? 'bg-gradient-to-r from-[#b45309] to-[#d97706] text-white border-transparent shadow-md shadow-[#d97706]/25 scale-102'
+                  : 'bg-[#fff8eb] dark:bg-[#231b14] border-[#e2c48c] dark:border-[#523d24] text-[#8c4608] dark:text-[#fde047] hover:bg-[#faebd7] hover:border-[#b8860b]'
+              }`}
+            >
+              <ShoppingBag className="w-3.5 h-3.5" />
+              <span>{t.shopNow || 'Shop Now'}</span>
+              <span className="text-[9px] bg-[#8c1d1e] text-white px-1.5 py-0.2 rounded-full uppercase font-bold tracking-tight">
+                All
+              </span>
+            </button>
 
             {/* Sone-Chandi ke Abhushan & Categories Mega Dropdown */}
             <div className="relative">
@@ -491,10 +520,38 @@ export const Header: React.FC<HeaderProps> = ({
             )}
           </div>
 
-          <nav className="flex flex-col space-y-3 font-medium text-sm">
+          <nav className="flex flex-col space-y-2 font-medium text-sm">
+            <button 
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onNavigatePage?.('home');
+              }}
+              className="text-left font-bold text-base text-[#8c1d1e] dark:text-[#d4af37] py-2 border-b border-[#e6dac1] dark:border-amber-500/10 flex items-center gap-2"
+            >
+              <span>🏰</span>
+              <span>{t.home}</span>
+            </button>
+
+            <button 
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onNavigatePage?.('shop', 'all');
+              }}
+              className="text-left font-bold text-base py-2.5 px-3 rounded-xl bg-gradient-to-r from-[#b45309] to-[#d97706] text-white flex items-center justify-between shadow-md"
+            >
+              <div className="flex items-center gap-2">
+                <ShoppingBag className="w-4 h-4" />
+                <span>{t.shopNow || 'Shop Now (Dedicated Boutique)'}</span>
+              </div>
+              <span className="text-[10px] bg-white/20 px-2 py-0.5 rounded-full uppercase">All</span>
+            </button>
+
             <a 
               href="#prime-collection" 
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={() => {
+                setMobileMenuOpen(false);
+                if (currentPage !== 'home') onNavigatePage?.('home');
+              }}
               className="hover:text-[#b8860b] dark:hover:text-amber-300 py-1.5 border-b border-[#e6dac1] dark:border-amber-500/10"
             >
               {t.primeCollection}

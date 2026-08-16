@@ -14,12 +14,13 @@ import { VIPBookingModal } from './components/VIPBookingModal';
 import { ReviewsSection } from './components/ReviewsSection';
 import { SearchModal } from './components/SearchModal';
 import { Footer } from './components/Footer';
+import { ShopPage } from './components/ShopPage';
 
 import { Language, Product, CartItem, MetalRate, Theme } from './types';
 import { PRODUCTS, INITIAL_METAL_RATES } from './data/products';
 
 export default function App() {
-  const [currentLang, setCurrentLang] = useState<Language>('en'); // Defaulting to English as requested
+  const [currentLang, setCurrentLang] = useState<Language>('en');
   const [currentTheme, setCurrentTheme] = useState<Theme>(() => {
     try {
       const saved = localStorage.getItem('swarna_theme');
@@ -29,7 +30,9 @@ export default function App() {
     }
   });
 
+  const [currentPage, setCurrentPage] = useState<'home' | 'shop'>('home');
   const [selectedMainCategory, setSelectedMainCategory] = useState<string>('all');
+  const [selectedSubCategory, setSelectedSubCategory] = useState<string>('all');
 
   const [cart, setCart] = useState<CartItem[]>(() => {
     try {
@@ -79,6 +82,40 @@ export default function App() {
 
   const toggleTheme = () => {
     setCurrentTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  };
+
+  // Sync URL hash for page routing
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      if (hash.startsWith('#shop')) {
+        setCurrentPage('shop');
+        const parts = hash.split('/');
+        if (parts[1]) {
+          setSelectedMainCategory(parts[1]);
+        }
+      } else {
+        setCurrentPage('home');
+      }
+    };
+
+    handleHashChange();
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  const handleNavigatePage = (page: 'home' | 'shop', category?: string, subCategory?: string) => {
+    setCurrentPage(page);
+    if (category) setSelectedMainCategory(category);
+    if (subCategory) setSelectedSubCategory(subCategory);
+
+    if (page === 'shop') {
+      window.location.hash = category && category !== 'all' ? `shop/${category}` : 'shop';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      window.location.hash = 'home';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   // Save to local storage
@@ -157,72 +194,95 @@ export default function App() {
         onOpenBooking={() => setIsBookingOpen(true)}
         onOpenSearch={() => setIsSearchOpen(true)}
         metalRate={metalRate}
+        currentPage={currentPage}
+        onNavigatePage={handleNavigatePage}
         onSelectMainCategory={(catId) => {
-          setSelectedMainCategory(catId);
-          const el = document.getElementById('sone-chandi-catalog');
-          if (el) el.scrollIntoView({ behavior: 'smooth' });
+          handleNavigatePage('shop', catId);
         }}
       />
 
       {/* Main Content Sections */}
-      <main>
-        {/* Hero Section with Canvas Particle Sparkles */}
-        <HeroCanvas
-          currentLang={currentLang}
-          onOpenTryOn={() => setIsTryOnOpen(true)}
-          onOpenBooking={() => setIsBookingOpen(true)}
-        />
+      <main className="pt-20">
+        {currentPage === 'home' ? (
+          <>
+            {/* Hero Section with Canvas Particle Sparkles */}
+            <HeroCanvas
+              currentLang={currentLang}
+              onOpenTryOn={() => setIsTryOnOpen(true)}
+              onOpenBooking={() => setIsBookingOpen(true)}
+              onOpenShop={() => handleNavigatePage('shop', 'all')}
+            />
 
-        {/* Live Gold Rate Ticker & Instant Valuation Calculator */}
-        <GoldRateTicker
-          metalRate={metalRate}
-          currentLang={currentLang}
-        />
+            {/* Live Gold Rate Ticker & Instant Valuation Calculator */}
+            <GoldRateTicker
+              metalRate={metalRate}
+              currentLang={currentLang}
+            />
 
-        {/* Interactive Desi Sone-Chandi ke Abhushan Explorer */}
-        <SoneChandiExplorer
-          products={PRODUCTS}
-          currentLang={currentLang}
-          selectedMainCategory={selectedMainCategory}
-          onQuickView={(p) => setQuickViewProduct(p)}
-          onTryOn={(p) => {
-            setTryOnProduct(p);
-            setIsTryOnOpen(true);
-          }}
-          onAddToCart={handleAddToCart}
-          onToggleWishlist={handleToggleWishlist}
-          wishlistIds={wishlist}
-        />
+            {/* Interactive Desi Sone-Chandi ke Abhushan Explorer */}
+            <SoneChandiExplorer
+              products={PRODUCTS}
+              currentLang={currentLang}
+              selectedMainCategory={selectedMainCategory}
+              onQuickView={(p) => setQuickViewProduct(p)}
+              onTryOn={(p) => {
+                setTryOnProduct(p);
+                setIsTryOnOpen(true);
+              }}
+              onAddToCart={handleAddToCart}
+              onToggleWishlist={handleToggleWishlist}
+              wishlistIds={wishlist}
+              onOpenShopPage={(cat) => handleNavigatePage('shop', cat || 'all')}
+            />
 
-        {/* Hindi Prime Collection Showcase */}
-        <PrimeCollection
-          products={PRODUCTS}
-          currentLang={currentLang}
-          onQuickView={(p) => setQuickViewProduct(p)}
-          onTryOn={(p) => {
-            setTryOnProduct(p);
-            setIsTryOnOpen(true);
-          }}
-          onAddToCart={handleAddToCart}
-          onToggleWishlist={handleToggleWishlist}
-          wishlistIds={wishlist}
-        />
+            {/* Hindi Prime Collection Showcase */}
+            <PrimeCollection
+              products={PRODUCTS}
+              currentLang={currentLang}
+              onQuickView={(p) => setQuickViewProduct(p)}
+              onTryOn={(p) => {
+                setTryOnProduct(p);
+                setIsTryOnOpen(true);
+              }}
+              onAddToCart={handleAddToCart}
+              onToggleWishlist={handleToggleWishlist}
+              wishlistIds={wishlist}
+            />
 
-        {/* Categories Section */}
-        <CategoryGrid
-          currentLang={currentLang}
-          onSelectCategory={(cat) => {
-            const el = document.getElementById('sone-chandi-catalog');
-            if (el) el.scrollIntoView({ behavior: 'smooth' });
-          }}
-          products={PRODUCTS}
-        />
+            {/* Categories Section */}
+            <CategoryGrid
+              currentLang={currentLang}
+              onSelectCategory={(cat) => {
+                handleNavigatePage('shop', cat);
+              }}
+              products={PRODUCTS}
+            />
 
-        {/* Craftsmanship & Purity Heritage Story */}
-        <Craftsmanship currentLang={currentLang} />
+            {/* Craftsmanship & Purity Heritage Story */}
+            <Craftsmanship currentLang={currentLang} />
 
-        {/* Verified Royal Customer Feedback */}
-        <ReviewsSection currentLang={currentLang} />
+            {/* Verified Royal Customer Feedback */}
+            <ReviewsSection currentLang={currentLang} />
+          </>
+        ) : (
+          /* DEDICATED SHOP NOW BOUTIQUE PAGE */
+          <ShopPage
+            products={PRODUCTS}
+            currentLang={currentLang}
+            initialCategory={selectedMainCategory}
+            initialSubCategory={selectedSubCategory}
+            metalRate={metalRate}
+            onNavigateHome={() => handleNavigatePage('home')}
+            onQuickView={(p) => setQuickViewProduct(p)}
+            onTryOn={(p) => {
+              setTryOnProduct(p);
+              setIsTryOnOpen(true);
+            }}
+            onAddToCart={handleAddToCart}
+            onToggleWishlist={handleToggleWishlist}
+            wishlistIds={wishlist}
+          />
+        )}
       </main>
 
       {/* Footer */}

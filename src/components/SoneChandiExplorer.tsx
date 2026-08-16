@@ -37,6 +37,7 @@ interface SoneChandiExplorerProps {
   onAddToCart: (product: Product) => void;
   onToggleWishlist: (product: Product) => void;
   wishlistIds: string[];
+  onOpenShopPage?: (category?: string) => void;
 }
 
 export const SoneChandiExplorer: React.FC<SoneChandiExplorerProps> = ({
@@ -48,6 +49,7 @@ export const SoneChandiExplorer: React.FC<SoneChandiExplorerProps> = ({
   onAddToCart,
   onToggleWishlist,
   wishlistIds,
+  onOpenShopPage,
 }) => {
   const [activeMainCat, setActiveMainCat] = useState<string>(selectedMainCategory || 'all');
   const [activeSubCat, setActiveSubCat] = useState<string>('all');
@@ -377,25 +379,25 @@ export const SoneChandiExplorer: React.FC<SoneChandiExplorerProps> = ({
                     setActiveMainCat(cat.id);
                     setActiveSubCat('all');
                   }}
-                  className={`relative px-3.5 py-2 rounded-xl text-xs font-sans font-bold transition-all duration-300 flex items-center gap-2 shadow-sm ${
+                  className={`relative px-4 py-2.5 rounded-2xl text-xs font-sans font-bold transition-all duration-300 flex items-center gap-2 border shadow-sm ${
                     isActive
-                      ? 'gold-shimmer-btn border border-[#b8860b] dark:border-[#d4af37] scale-102 shadow-lg'
+                      ? 'bg-gradient-to-r from-[#b45309] to-[#d97706] text-white border-transparent shadow-md shadow-[#d97706]/25 scale-102 ring-2 ring-[#d97706]/40'
                       : isPayal
-                      ? 'bg-gradient-to-r from-[#edf2f7] to-[#e2e8f0] dark:from-[#1a2f26] dark:to-[#0b2239] border-2 border-[#a0aec0] dark:border-[#d4af37]/60 text-[#1a202c] dark:text-amber-200 hover:scale-102 ring-1 ring-[#cbd5e0]'
+                      ? 'bg-[#f0f4f8] dark:bg-[#15232a] border-2 border-[#94a3b8] dark:border-[#38bdf8]/40 text-[#0f172a] dark:text-[#e0f2fe] hover:border-[#38bdf8] hover:bg-white dark:hover:bg-[#1a2f38]'
                       : isDesi
-                      ? 'bg-[#fbf4e6] dark:bg-[#0d3b2e]/70 border border-[#b8860b]/50 dark:border-[#d4af37]/50 text-[#8c1d1e] dark:text-[#f7e7ce] hover:border-[#8c1d1e]'
-                      : 'theme-bg-surface theme-text-primary border theme-border hover:border-[#b8860b] dark:hover:border-[#d4af37]'
+                      ? 'bg-[#fffaf0] dark:bg-[#221c16] border border-[#eab308]/60 dark:border-[#eab308]/40 text-[#713f12] dark:text-[#fef08a] hover:border-[#ca8a04] hover:bg-[#fff7e6]'
+                      : 'bg-white dark:bg-[#1a1612] text-[#2c1f14] dark:text-[#f3ede4] border border-[#d8c8af] dark:border-[#383025] hover:border-[#b8860b] hover:bg-[#faf6ee] dark:hover:bg-[#241e18]'
                   }`}
                 >
-                  <span>{cat.icon}</span>
-                  <span>{cat.label}</span>
+                  <span className="text-sm">{cat.icon}</span>
+                  <span className="font-semibold">{cat.label}</span>
                   {cat.badge && (
-                    <span className={`text-[8px] px-1.5 py-0.5 rounded font-bold uppercase tracking-tight ml-0.5 ${
+                    <span className={`text-[9px] px-2 py-0.5 rounded-full font-bold uppercase tracking-tight ml-0.5 ${
                       isActive
-                        ? 'bg-black text-white'
+                        ? 'bg-black/30 text-white'
                         : isPayal
-                        ? 'bg-[#2d3748] text-white'
-                        : 'bg-[#8c1d1e] text-white dark:bg-[#d4af37] dark:text-[#05110d]'
+                        ? 'bg-[#0f172a] text-white dark:bg-[#38bdf8] dark:text-black'
+                        : 'bg-[#8c1d1e] text-white dark:bg-[#d4af37] dark:text-black'
                     }`}>
                       {cat.badge.split(' ')[0]}
                     </span>
@@ -403,6 +405,17 @@ export const SoneChandiExplorer: React.FC<SoneChandiExplorerProps> = ({
                 </button>
               );
             })}
+
+            {/* Quick Link to Dedicated Shop Page */}
+            {onOpenShopPage && (
+              <button
+                onClick={() => onOpenShopPage(activeMainCat)}
+                className="px-4 py-2.5 rounded-2xl text-xs font-sans font-bold bg-[#8c1d1e] text-white hover:bg-[#a62425] transition-all flex items-center gap-1.5 shadow-md ml-auto"
+              >
+                <ShoppingBag className="w-3.5 h-3.5" />
+                <span>Open Dedicated Shop Page →</span>
+              </button>
+            )}
           </div>
         </div>
 
