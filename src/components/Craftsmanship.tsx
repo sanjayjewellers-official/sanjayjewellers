@@ -35,12 +35,12 @@ export const Craftsmanship: React.FC<CraftsmanshipProps> = ({ currentLang }) => 
   ];
 
   return (
-    <section id="craftsmanship" className="py-20 bg-white dark:bg-[#000000] relative border-t border-[#e6dac1] dark:border-[#d4af37]/30 text-[#1a1612] dark:text-[#fde047] transition-colors duration-400">
+    <section id="craftsmanship" className="py-20 bg-white dark:bg-[#000000] relative border-t border-[#e6dac1] dark:border-[#d4af37]/30 transition-colors duration-400">
       <div className="max-w-7xl mx-auto px-4 sm:px-12 space-y-14">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f4ebd0] dark:bg-[#1f190e] border border-[#b8860b]/30 dark:border-[#d4af37]/50 text-[#8c1d1e] dark:text-[#fde047] text-[10px] font-sans font-bold uppercase tracking-[0.3em]">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f4ebd0] dark:bg-[#1a1408] border border-[#b8860b]/40 dark:border-[#d4af37]/60 text-[#8c1d1e] dark:text-[#fde047] text-[10px] font-sans font-bold uppercase tracking-[0.3em]">
             <Sparkles className="w-3.5 h-3.5 text-[#b8860b] dark:text-[#fde047] animate-pulse" />
             <span>{t.badge}</span>
           </div>
@@ -49,7 +49,7 @@ export const Craftsmanship: React.FC<CraftsmanshipProps> = ({ currentLang }) => 
             {t.title}
           </h2>
 
-          <p className="text-xs sm:text-sm text-[#5c5244] dark:text-[#d4af37] font-sans font-light leading-relaxed">
+          <p className="text-xs sm:text-sm text-[#3d3023] dark:text-[#d4af37] font-sans leading-relaxed">
             {t.subtitle}
           </p>
         </div>
@@ -60,10 +60,13 @@ export const Craftsmanship: React.FC<CraftsmanshipProps> = ({ currentLang }) => 
           {/* Left Craftsmanship Image Showcase */}
           <div className="relative rounded-3xl overflow-hidden shadow-2xl border-2 border-[#e6dac1] dark:border-[#d4af37]/40 aspect-[4/3] bg-[#000000]">
             <img
-              src="https://images.unsplash.com/photo-1611591475111-a83d3b6f00c5?auto=format&fit=crop&w=1200&q=85"
-              alt="Master Goldsmith at Work"
+              src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80"
+              alt="Master Goldsmith Handcrafted Jewellery Artistry"
               className="w-full h-full object-cover object-center"
               referrerPolicy="no-referrer"
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=80';
+              }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
             
@@ -92,7 +95,7 @@ export const Craftsmanship: React.FC<CraftsmanshipProps> = ({ currentLang }) => 
                   <h3 className="text-base font-serif font-bold text-[#1a1612] dark:text-[#fde047]">
                     {pillar.title}
                   </h3>
-                  <p className="text-xs text-[#5c5244] dark:text-[#d4af37] font-sans leading-relaxed">
+                  <p className="text-xs text-[#3d3023] dark:text-[#d4af37] font-sans leading-relaxed">
                     {pillar.desc}
                   </p>
                 </div>
