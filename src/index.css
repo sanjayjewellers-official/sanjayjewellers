@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   /* Royal Cream & Gold Luxury Theme */
   --bg-primary: #faf7f0;
@@ -50,7 +52,7 @@
   --badge-text: #d4af37;
 }
 
-body {
+html, body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   transition: background-color 0.3s ease, color 0.3s ease;
