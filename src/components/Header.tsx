@@ -10,9 +10,9 @@ import {
   Calendar, 
   Phone, 
   ChevronDown,
-  ShieldCheck,
+  ShieldCheck, 
   TrendingUp,
-  Sun,
+  Sun, 
   Moon,
   Layers,
   Crown,
@@ -67,7 +67,7 @@ export const Header: React.FC<HeaderProps> = ({
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 30);
+      setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -90,8 +90,8 @@ export const Header: React.FC<HeaderProps> = ({
     { 
       id: 'pairon_chandi', 
       label: treeT.mainCategories.pairon_chandi, 
-      desc: '999 Fine Silver Bridal Payals, Jhanjhar & Bichhiya',
-      badge: '🌟 Payal & Chandi Special',
+      desc: '999 Fine Silver Bridal Payals & Bichhiya',
+      badge: '🌟 Payal Special',
       icon: '✨',
       isHighlight: true,
       highlightType: 'payal' 
@@ -99,8 +99,8 @@ export const Header: React.FC<HeaderProps> = ({
     { 
       id: 'gala', 
       label: treeT.mainCategories.gala, 
-      desc: 'Desi Rani Haar, Mangalsutra, Hansli & Chokers',
-      badge: '👑 Desi Jewellery Heritage',
+      desc: 'Rani Haar, Mangalsutra, Hansli & Chokers',
+      badge: '👑 Desi Haar',
       icon: '📿',
       isHighlight: true,
       highlightType: 'desi' 
@@ -108,8 +108,8 @@ export const Header: React.FC<HeaderProps> = ({
     { 
       id: 'sir_matha', 
       label: treeT.mainCategories.sir_matha, 
-      desc: 'Desi Rajasthani Borla, Maang Tikka & Shephool',
-      badge: '👑 Desi Shringaar',
+      desc: 'Bridal Maang Tikka, Borla & Shephool',
+      badge: '👑 Shringaar',
       icon: '✨',
       isHighlight: true,
       highlightType: 'desi' 
@@ -118,32 +118,29 @@ export const Header: React.FC<HeaderProps> = ({
       id: 'haath_kalaai', 
       label: treeT.mainCategories.haath_kalaai, 
       desc: 'Royal Temple Kada, Bajuvaand & Haath Phool',
-      badge: '👑 Desi Kada & Armlets',
       icon: '💫',
       isHighlight: false 
     },
     { 
       id: 'kaan', 
       label: treeT.mainCategories.kaan, 
-      desc: 'Shahi Chandbali, Jhumka & Jaipuri Karnfool',
+      desc: 'Chandbali, Jhumka & Jaipuri Karnfool',
       icon: '💎',
       isHighlight: false 
     },
     { 
       id: 'ungliyan', 
       label: treeT.mainCategories.ungliyan, 
-      desc: 'Cocktail Rings & Royal Nizam Arsi Mirror Rings',
+      desc: 'Cocktail Rings & Royal Heritage Bands',
       icon: '💍',
       isHighlight: false 
     },
     { 
       id: 'kamar', 
       label: treeT.mainCategories.kamar, 
-      desc: 'Temple Heritage Kardhani & Tagdi Waistbelts',
-      badge: '👑 Desi Kardhani',
+      desc: 'Temple Heritage Kardhani & Tagdi Belts',
       icon: '✨',
-      isHighlight: true,
-      highlightType: 'desi' 
+      isHighlight: false 
     },
   ];
 
@@ -159,80 +156,73 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-      {/* Top Ticker & Bar */}
-      <div className="bg-[#1c150c] dark:bg-[#030a08] border-b border-[#d4af37]/30 text-xs text-[#f7e7ce] py-1.5 px-4 sm:px-12 transition-colors">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
-          {/* Ticker marquee message */}
-          <div className="flex items-center gap-3 overflow-x-auto no-scrollbar py-0.5">
-            <span className="flex items-center gap-1.5 text-[#d4af37] font-bold uppercase tracking-widest text-[10px] bg-[#d4af37]/15 px-2.5 py-0.5 rounded-full border border-[#d4af37]/40 whitespace-nowrap">
-              <TrendingUp className="w-3.5 h-3.5 text-[#d4af37] animate-pulse" />
-              {translations[currentLang].hero.liveRateNotice}
-            </span>
-            <div className="flex items-center gap-2.5 font-mono text-[11px] whitespace-nowrap">
-              <span className="text-[#f7e7ce]">
-                <strong className="text-[#d4af37]">24K:</strong> ₹{metalRate.gold24k.toLocaleString('en-IN')}/g
-              </span>
-              <span className="text-[#d4af37]/40">•</span>
-              <span className="text-[#f7e7ce]">
-                <strong className="text-[#d4af37]">22K:</strong> ₹{metalRate.gold22k.toLocaleString('en-IN')}/g
-              </span>
-              <span className="text-[#d4af37]/40">•</span>
-              <span className="text-[#f7e7ce]">
-                <strong className="text-[#d4af37]">18K:</strong> ~₹{metalRate.gold18k.toLocaleString('en-IN')}/g
-              </span>
-              <span className="text-[#d4af37]/40">•</span>
-              <span className="text-[#f7e7ce]">
-                <strong className="text-[#c0c0c0]">999 Silver:</strong> ₹{metalRate.silver999.toLocaleString('en-IN')}/g
-              </span>
+      
+      {/* Ultra-Slim Top Ticker Bar (Single Clean Line, No Wrapping at 100% Zoom) */}
+      <div className="bg-[#14100b] dark:bg-[#030a08] border-b border-[#d4af37]/30 text-xs text-[#f7e7ce] py-1 px-4 sm:px-8 transition-colors">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
+          
+          {/* Left: Compact Bullion Rates & Hallmark Badge */}
+          <div className="flex items-center gap-3 overflow-hidden text-[11px] font-sans">
+            <div className="hidden sm:flex items-center gap-1 text-[#d4af37] font-bold uppercase tracking-wider text-[10px] bg-[#d4af37]/15 px-2 py-0.5 rounded-full border border-[#d4af37]/40 shrink-0">
+              <TrendingUp className="w-3 h-3 text-[#d4af37]" />
+              <span>Live Rates:</span>
             </div>
-            <span className="hidden lg:inline-block text-[#d4af37]/40">•</span>
-            <span className="hidden lg:flex items-center gap-1 text-[#f7e7ce]/90 text-[11px] font-sans tracking-wide whitespace-nowrap">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#d4af37]" />
-              100% BIS Hallmarked Purity
+            
+            <div className="flex items-center gap-2 font-mono text-[11px] truncate">
+              <span><strong>24K:</strong> ₹{metalRate.gold24k}/g</span>
+              <span className="text-[#d4af37]/40">•</span>
+              <span className="text-[#d4af37] font-bold"><strong>22K:</strong> ₹{metalRate.gold22k}/g</span>
+              <span className="text-[#d4af37]/40">•</span>
+              <span><strong>999 Silver:</strong> ₹{metalRate.silver999}/g</span>
+            </div>
+
+            <span className="hidden md:flex items-center gap-1 text-[#d4af37] text-[10px] font-sans tracking-wide ml-2 shrink-0">
+              <ShieldCheck className="w-3 h-3 text-[#d4af37]" />
+              <span>100% BIS Hallmarked</span>
             </span>
           </div>
 
-          {/* Right utility: Theme Switcher, Language Switcher & Direct Contact */}
-          <div className="flex items-center gap-3 ml-auto">
-            {/* Theme Toggle Button */}
+          {/* Right: Theme Toggle, Direct Phone & Language */}
+          <div className="flex items-center gap-2.5 shrink-0 ml-auto text-[11px]">
+            <a href="tel:+919425275511" className="hidden sm:flex items-center gap-1 hover:text-[#d4af37] transition-colors text-[#f7e7ce]/80">
+              <Phone className="w-3 h-3 text-[#d4af37]" />
+              <span>+91 94252 75511</span>
+            </a>
+
+            <span className="hidden sm:inline text-white/20">|</span>
+
+            {/* Theme Toggle */}
             <button
               onClick={onThemeToggle}
-              className="flex items-center gap-1.5 bg-[#2a2215] dark:bg-[#05110d] border border-[#d4af37]/40 hover:border-[#d4af37] px-2.5 py-1 rounded-full text-[10px] font-sans font-bold text-[#d4af37] transition-all shadow-xs"
-              title={currentTheme === 'dark' ? t.themeLight : t.themeDark}
-              aria-label="Toggle Theme Mode"
+              className="flex items-center gap-1 bg-[#251e14] dark:bg-[#0d1f19] border border-[#d4af37]/40 hover:border-[#d4af37] px-2 py-0.5 rounded-full text-[10px] font-sans font-semibold text-[#d4af37] transition-all"
+              title="Toggle Theme Mode"
             >
               {currentTheme === 'dark' ? (
                 <>
-                  <Sun className="w-3.5 h-3.5 text-amber-300" />
-                  <span className="hidden sm:inline">Light Theme</span>
+                  <Sun className="w-3 h-3 text-amber-300" />
+                  <span>Light</span>
                 </>
               ) : (
                 <>
-                  <Moon className="w-3.5 h-3.5 text-amber-200" />
-                  <span className="hidden sm:inline">Dark Theme</span>
+                  <Moon className="w-3 h-3 text-amber-200" />
+                  <span>Dark</span>
                 </>
               )}
             </button>
 
-            <a href="tel:+91180088899" className="hidden sm:flex items-center gap-1 hover:text-[#d4af37] transition-colors font-sans text-[11px] text-[#f7e7ce]/90">
-              <Phone className="w-3 h-3 text-[#d4af37]" />
-              <span>+91 1800-888-999</span>
-            </a>
-
-            {/* Language Selector Dropdown */}
+            {/* Language Selector */}
             <div className="relative">
               <button
                 onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-                className="flex items-center gap-1.5 bg-[#2a2215] dark:bg-[#05110d] border border-[#d4af37]/40 hover:border-[#d4af37] px-3 py-1 rounded-full text-[10px] font-sans font-bold text-[#d4af37] transition-all"
-                aria-label="Select Language"
+                className="flex items-center gap-1 bg-[#251e14] dark:bg-[#0d1f19] border border-[#d4af37]/40 hover:border-[#d4af37] px-2 py-0.5 rounded-full text-[10px] font-sans font-bold text-[#d4af37] transition-all"
               >
-                <Globe className="w-3.5 h-3.5 text-[#d4af37]" />
+                <Globe className="w-3 h-3 text-[#d4af37]" />
                 <span>{languages.find(l => l.code === currentLang)?.nativeName}</span>
-                <ChevronDown className={`w-3 h-3 text-[#d4af37] transition-transform ${langDropdownOpen ? 'rotate-180' : ''}`} />
+                <ChevronDown className="w-2.5 h-2.5" />
               </button>
 
               {langDropdownOpen && (
-                <div className="absolute right-0 mt-1 w-36 bg-[#ffffff] dark:bg-[#05110d] border border-[#d4af37]/40 rounded-xl shadow-2xl overflow-hidden z-50">
+                <div className="absolute right-0 mt-1 w-32 bg-white dark:bg-[#0d1f19] border border-[#d4af37]/40 rounded-xl shadow-2xl overflow-hidden z-50">
                   {languages.map((lang) => (
                     <button
                       key={lang.code}
@@ -240,61 +230,57 @@ export const Header: React.FC<HeaderProps> = ({
                         onLanguageChange(lang.code);
                         setLangDropdownOpen(false);
                       }}
-                      className={`w-full text-left px-3 py-2 text-xs flex items-center justify-between hover:bg-[#d4af37]/15 transition-colors ${
+                      className={`w-full text-left px-3 py-1.5 text-xs flex items-center justify-between transition-colors ${
                         currentLang === lang.code 
                           ? 'text-[#b8860b] dark:text-[#d4af37] font-bold bg-[#d4af37]/10' 
-                          : 'text-[#1a1612] dark:text-[#f7e7ce]/80'
+                          : 'text-[#1a1612] dark:text-[#f7e7ce]/80 hover:bg-[#faf6ee] dark:hover:bg-[#1a2f27]'
                       }`}
                     >
                       <span>{lang.nativeName}</span>
-                      <span className="text-[10px] text-[#b8860b] dark:text-[#d4af37]/70 uppercase">{lang.code}</span>
+                      <span className="text-[9px] uppercase opacity-70">{lang.code}</span>
                     </button>
                   ))}
                 </div>
               )}
             </div>
           </div>
+
         </div>
       </div>
 
-      {/* Main Luxury Navigation Header */}
-      <div className={`transition-all duration-300 bg-white/95 dark:bg-[#05110d]/95 backdrop-blur-md shadow-md dark:shadow-2xl border-b border-[#e6dac1] dark:border-[#d4af37]/30 text-[#1a1612] dark:text-[#f7e7ce] ${
-        isScrolled ? 'py-2.5' : 'py-3.5'
+      {/* Main Navigation Header (Compact & Balanced Height) */}
+      <div className={`transition-all duration-300 bg-white/95 dark:bg-[#0a0806]/95 backdrop-blur-md border-b border-[#ebdcc9] dark:border-[#382f25] text-[#1a1612] dark:text-[#f7e7ce] ${
+        isScrolled ? 'py-2 shadow-md' : 'py-2.5 shadow-sm'
       }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-12 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
           
           {/* Brand Logo & Heritage Crest */}
-          <a href="#" className="flex items-center gap-3 group">
-            <div className="relative w-10 h-10 rounded-full border-2 border-[#b8860b] dark:border-[#d4af37] p-0.5 flex items-center justify-center bg-gradient-to-br from-[#d4af37]/20 via-[#fcf9f2] dark:via-[#05110d] to-[#d4af37]/10 group-hover:border-[#8c1d1e] dark:group-hover:border-[#f7e7ce] transition-all shadow-md">
-              <div className="w-full h-full bg-[#b8860b] dark:bg-[#d4af37] rounded-full flex items-center justify-center text-white dark:text-[#05110d] font-bold font-serif text-xs shadow-inner">
-                SJS
-              </div>
-              <Sparkles className="w-3 h-3 text-[#b8860b] dark:text-[#d4af37] absolute -top-1 -right-1 animate-pulse" />
+          <button 
+            onClick={() => onNavigatePage?.('home')}
+            className="flex items-center gap-2.5 group text-left shrink-0"
+          >
+            <div className="relative w-9 h-9 rounded-full border-2 border-[#b8860b] dark:border-[#d4af37] flex items-center justify-center bg-gradient-to-br from-[#d4af37]/20 to-[#d4af37]/5 shadow-sm group-hover:scale-105 transition-transform">
+              <span className="text-xs font-serif font-bold text-[#b8860b] dark:text-[#d4af37]">SJS</span>
+              <Sparkles className="w-2.5 h-2.5 text-[#b8860b] absolute -top-0.5 -right-0.5" />
             </div>
             
             <div className="flex flex-col">
-              <div className="flex items-center gap-1.5">
-                <span className="text-lg sm:text-2xl font-serif font-bold tracking-[0.12em] text-[#1a1612] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#f7e7ce] dark:via-[#d4af37] dark:to-[#f7e7ce] block leading-tight drop-shadow-xs">
-                  SANJAY JEWELLERS SARIYA
-                </span>
-              </div>
-              
-              <div className="flex items-center gap-1.5 mt-0.5">
-                <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] font-sans font-bold text-[#8c1d1e] dark:text-[#d4af37] bg-[#8c1d1e]/10 dark:bg-[#d4af37]/15 px-2 py-0.5 rounded-full border border-[#8c1d1e]/20 dark:border-[#d4af37]/40 shadow-xs flex items-center gap-1">
-                  <Crown className="w-2.5 h-2.5 text-[#8c1d1e] dark:text-[#d4af37]" />
-                  <span>{t.tagline}</span>
-                </span>
-              </div>
+              <span className="text-base sm:text-lg font-serif font-bold tracking-[0.1em] text-[#1a1612] dark:text-[#f7e7ce] leading-tight">
+                SANJAY JEWELLERS
+              </span>
+              <span className="text-[9px] uppercase tracking-[0.2em] font-sans font-bold text-[#8c1d1e] dark:text-[#d4af37]">
+                Sariya • 30 Yrs Heritage
+              </span>
             </div>
-          </a>
+          </button>
 
-          {/* Desktop Nav Items */}
-          <nav className="hidden lg:flex items-center gap-6 text-[11px] uppercase tracking-widest font-sans font-semibold text-[#5c5244] dark:text-[#d4af37]/90">
+          {/* Desktop Navigation Links */}
+          <nav className="hidden lg:flex items-center gap-5 text-xs font-sans font-semibold uppercase tracking-wider text-[#4d4030] dark:text-[#d1c7b7]">
             
-            {/* Home Button */}
+            {/* Home */}
             <button 
               onClick={() => onNavigatePage?.('home')}
-              className={`hover:text-[#b8860b] dark:hover:text-[#f7e7ce] transition-colors relative py-1 ${
+              className={`hover:text-[#b8860b] dark:hover:text-[#f7e7ce] transition-colors py-1 ${
                 currentPage === 'home' 
                   ? 'text-[#8c1d1e] dark:text-[#d4af37] font-bold border-b-2 border-[#b8860b] dark:border-[#d4af37]' 
                   : ''
@@ -303,233 +289,168 @@ export const Header: React.FC<HeaderProps> = ({
               {t.home}
             </button>
 
-            {/* Dedicated Shop Now Boutique Button */}
+            {/* Dedicated Shop Now Boutique */}
             <button 
               onClick={() => onNavigatePage?.('shop', 'all')}
               className={`px-3.5 py-1.5 rounded-full font-bold transition-all flex items-center gap-1.5 border shadow-sm ${
                 currentPage === 'shop'
-                  ? 'bg-gradient-to-r from-[#b45309] to-[#d97706] text-white border-transparent shadow-md shadow-[#d97706]/25 scale-102'
-                  : 'bg-[#fff8eb] dark:bg-[#231b14] border-[#e2c48c] dark:border-[#523d24] text-[#8c4608] dark:text-[#fde047] hover:bg-[#faebd7] hover:border-[#b8860b]'
+                  ? 'bg-gradient-to-r from-[#b45309] to-[#d97706] text-white border-transparent shadow-md shadow-[#d97706]/20 scale-102'
+                  : 'bg-[#fff8eb] dark:bg-[#201812] border-[#e2c48c] dark:border-[#523d24] text-[#8c4608] dark:text-[#fde047] hover:bg-[#faebd7] hover:border-[#b8860b]'
               }`}
             >
               <ShoppingBag className="w-3.5 h-3.5" />
-              <span>{t.shopNow || 'Shop Now'}</span>
-              <span className="text-[9px] bg-[#8c1d1e] text-white px-1.5 py-0.2 rounded-full uppercase font-bold tracking-tight">
+              <span>Shop Now</span>
+              <span className="text-[9px] bg-[#8c1d1e] text-white px-1.5 py-0.2 rounded-full uppercase font-bold">
                 All
               </span>
             </button>
 
-            {/* Sone-Chandi ke Abhushan & Categories Mega Dropdown */}
+            {/* Categories Dropdown (Opens Shop with Category) */}
             <div className="relative">
               <button
                 onClick={() => setCategoryDropdownOpen(!categoryDropdownOpen)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full font-bold transition-all border ${
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full font-semibold transition-all border ${
                   categoryDropdownOpen
-                    ? 'bg-[#b8860b]/15 dark:bg-[#d4af37]/20 border-[#b8860b] dark:border-[#d4af37] text-[#b8860b] dark:text-[#d4af37]'
-                    : 'bg-[#f7f1e1] dark:bg-[#0d3b2e]/60 border-[#e6dac1] dark:border-[#d4af37]/30 text-[#1a1612] dark:text-[#f7e7ce] hover:border-[#b8860b] dark:hover:border-[#d4af37]'
+                    ? 'bg-[#b8860b]/15 border-[#b8860b] text-[#b8860b] dark:text-[#d4af37]'
+                    : 'bg-[#faf6ee] dark:bg-[#1a1612] border-[#e2d5be] dark:border-[#383025] text-[#332b21] dark:text-[#e8dec8] hover:border-[#b8860b]'
                 }`}
               >
-                <Layers className="w-3.5 h-3.5 text-[#b8860b] dark:text-[#d4af37]" />
-                <span>Categories / आभूषण</span>
-                <ChevronDown className={`w-3.5 h-3.5 transition-transform text-[#b8860b] dark:text-[#d4af37] ${categoryDropdownOpen ? 'rotate-180' : ''}`} />
+                <Layers className="w-3.5 h-3.5 text-[#b8860b]" />
+                <span>Categories</span>
+                <ChevronDown className={`w-3 h-3 text-[#b8860b] transition-transform ${categoryDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
 
-              {/* Mega Dropdown Menu */}
               {categoryDropdownOpen && (
-                <div className="absolute left-0 mt-2 w-96 bg-[#ffffff] dark:bg-[#05110d] border-2 border-[#b8860b]/40 dark:border-[#d4af37]/50 rounded-2xl shadow-2xl py-3 z-50 animate-fadeIn text-left">
-                  <div className="px-5 py-2 border-b border-[#e6dac1] dark:border-[#d4af37]/20 flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-[#b8860b] dark:text-[#d4af37]">
-                    <span className="flex items-center gap-1.5">
-                      <Crown className="w-3.5 h-3.5" />
-                      <span>Select Category / आभूषण चुनें</span>
-                    </span>
-                    <span className="text-[10px] text-[#5c5244] dark:text-[#f7e7ce]/60 lowercase font-normal">
-                      click to toggle
-                    </span>
+                <div className="absolute left-0 mt-2 w-80 bg-white dark:bg-[#171411] border-2 border-[#b8860b]/40 dark:border-[#d4af37]/40 rounded-2xl shadow-2xl py-2 z-50 animate-fadeIn text-left">
+                  <div className="px-4 py-2 border-b border-[#ebdcc9] dark:border-[#2d261d] text-[10px] font-bold uppercase tracking-wider text-[#b8860b] flex items-center justify-between">
+                    <span>Explore by Category</span>
                   </div>
 
-                  <div className="max-h-[380px] overflow-y-auto px-2 py-2 space-y-1">
+                  <div className="max-h-72 overflow-y-auto p-1.5 space-y-1">
                     {mainCategoriesList.map((cat) => (
                       <button
                         key={cat.id}
                         onClick={() => handleCategorySelect(cat.id)}
-                        className={`w-full text-left px-3.5 py-2.5 rounded-xl transition-all flex items-start gap-3 group/item ${
-                          cat.isHighlight
-                            ? cat.highlightType === 'payal'
-                              ? 'bg-gradient-to-r from-[#eef2f5] to-[#f4edd8] dark:from-[#0d3b2e] dark:to-[#0b2239] border border-[#c0c0c0] dark:border-[#d4af37]/40 shadow-xs'
-                              : 'bg-[#faf3e3] dark:bg-[#0d3b2e]/80 border border-[#b8860b]/30 dark:border-[#d4af37]/40 shadow-xs'
-                            : 'hover:bg-[#f7f1e1] dark:hover:bg-[#d4af37]/10'
-                        }`}
+                        className="w-full text-left px-3 py-2 rounded-xl text-xs flex items-center justify-between hover:bg-[#faf6ee] dark:hover:bg-[#25201a] transition-colors"
                       >
-                        <span className="text-lg shrink-0 mt-0.5">{cat.icon}</span>
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center justify-between gap-1">
-                            <span className="text-xs font-bold text-[#1a1612] dark:text-[#f7e7ce] group-hover/item:text-[#b8860b] dark:group-hover/item:text-[#d4af37] font-sans">
-                              {cat.label}
-                            </span>
-                            {cat.badge && (
-                              <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-tighter whitespace-nowrap ${
-                                cat.highlightType === 'payal'
-                                  ? 'bg-[#1c150c] text-[#f7e7ce] border border-[#c0c0c0]'
-                                  : 'bg-[#8c1d1e] text-white dark:bg-[#d4af37] dark:text-[#05110d]'
-                              }`}>
-                                {cat.badge}
-                              </span>
-                            )}
-                          </div>
-                          <p className="text-[10px] text-[#5c5244] dark:text-[#f7e7ce]/70 font-sans truncate mt-0.5">
-                            {cat.desc}
-                          </p>
-                        </div>
+                        <span className="flex items-center gap-2">
+                          <span>{cat.icon}</span>
+                          <span className="font-medium text-[#1a1612] dark:text-[#f7e7ce]">{cat.label}</span>
+                        </span>
+                        {cat.badge && (
+                          <span className="text-[9px] bg-[#8c1d1e] text-white px-1.5 py-0.2 rounded-full font-bold">
+                            {cat.badge}
+                          </span>
+                        )}
                       </button>
                     ))}
-                  </div>
-
-                  <div className="px-4 pt-2 border-t border-[#e6dac1] dark:border-[#d4af37]/20 text-center">
-                    <a
-                      href="#sone-chandi-catalog"
-                      onClick={() => handleCategorySelect('all')}
-                      className="text-[10px] font-bold text-[#b8860b] dark:text-[#d4af37] hover:underline uppercase tracking-widest inline-flex items-center gap-1"
-                    >
-                      <span>Explore Full Sone-Chandi Catalog</span>
-                      <span>→</span>
-                    </a>
                   </div>
                 </div>
               )}
             </div>
 
-            <a href="#categories" className="hover:text-[#b8860b] dark:hover:text-[#f7e7ce] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-[#b8860b] dark:after:bg-[#d4af37] hover:after:w-full after:transition-all">
-              {t.categories}
+            {/* Other Direct Links */}
+            <a 
+              href="#rate-calculator" 
+              onClick={() => { if (currentPage !== 'home') onNavigatePage?.('home'); }}
+              className="hover:text-[#b8860b] dark:hover:text-[#f7e7ce] transition-colors py-1"
+            >
+              Live Gold Rate
             </a>
-            <a href="#craftsmanship" className="hover:text-[#b8860b] dark:hover:text-[#f7e7ce] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-[#b8860b] dark:after:bg-[#d4af37] hover:after:w-full after:transition-all">
-              {t.craftsmanship}
+
+            <a 
+              href="#craftsmanship" 
+              onClick={() => { if (currentPage !== 'home') onNavigatePage?.('home'); }}
+              className="hover:text-[#b8860b] dark:hover:text-[#f7e7ce] transition-colors py-1"
+            >
+              Heritage
             </a>
-            <a href="#rate-calculator" className="hover:text-[#b8860b] dark:hover:text-[#f7e7ce] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-[#b8860b] dark:after:bg-[#d4af37] hover:after:w-full after:transition-all">
-              {t.goldRate}
-            </a>
-            <a href="#reviews" className="hover:text-[#b8860b] dark:hover:text-[#f7e7ce] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-[#b8860b] dark:after:bg-[#d4af37] hover:after:w-full after:transition-all">
-              {t.reviews}
+
+            <a 
+              href="#reviews" 
+              onClick={() => { if (currentPage !== 'home') onNavigatePage?.('home'); }}
+              className="hover:text-[#b8860b] dark:hover:text-[#f7e7ce] transition-colors py-1"
+            >
+              Reviews
             </a>
           </nav>
 
-          {/* Action Utilities & VIP Button */}
-          <div className="flex items-center gap-2.5 sm:gap-4">
+          {/* Action Utilities & Compact VIP Button */}
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             
-            {/* Search Trigger */}
+            {/* Search */}
             <button
               onClick={onOpenSearch}
-              className="p-2 text-[#5c5244] dark:text-[#f7e7ce]/80 hover:text-[#b8860b] dark:hover:text-[#d4af37] hover:bg-[#f7f1e1] dark:hover:bg-[#d4af37]/10 rounded-full transition-all"
-              aria-label="Search Jewellery"
+              className="p-2 text-[#5c5244] dark:text-[#f7e7ce]/80 hover:text-[#b8860b] hover:bg-[#faf6ee] dark:hover:bg-[#201812] rounded-full transition-all"
               title="Search Jewellery"
             >
               <Search className="w-4 h-4" />
             </button>
 
-            {/* Wishlist Button */}
+            {/* Wishlist */}
             <button
               onClick={onOpenWishlist}
-              className="p-2 text-[#5c5244] dark:text-[#f7e7ce]/80 hover:text-[#b8860b] dark:hover:text-[#d4af37] hover:bg-[#f7f1e1] dark:hover:bg-[#d4af37]/10 rounded-full relative transition-all"
-              aria-label="View Wishlist"
+              className="p-2 text-[#5c5244] dark:text-[#f7e7ce]/80 hover:text-[#b8860b] hover:bg-[#faf6ee] dark:hover:bg-[#201812] rounded-full relative transition-all"
               title="Wishlist"
             >
               <Heart className="w-4 h-4" />
               {wishlistCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-[#b8860b] dark:bg-[#d4af37] text-white dark:text-[#05110d] font-bold text-[9px] w-4 h-4 rounded-full flex items-center justify-center shadow-xs">
+                <span className="absolute -top-0.5 -right-0.5 bg-[#b8860b] text-white font-bold text-[9px] w-4 h-4 rounded-full flex items-center justify-center">
                   {wishlistCount}
                 </span>
               )}
             </button>
 
-            {/* Cart Drawer Trigger */}
+            {/* Cart */}
             <button
               onClick={onOpenCart}
-              className="p-2 text-[#5c5244] dark:text-[#f7e7ce]/80 hover:text-[#b8860b] dark:hover:text-[#d4af37] hover:bg-[#f7f1e1] dark:hover:bg-[#d4af37]/10 rounded-full relative transition-all"
-              aria-label="View Shopping Bag"
+              className="p-2 text-[#5c5244] dark:text-[#f7e7ce]/80 hover:text-[#b8860b] hover:bg-[#faf6ee] dark:hover:bg-[#201812] rounded-full relative transition-all"
               title="Shopping Bag"
             >
               <ShoppingBag className="w-4 h-4" />
               {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-[#b8860b] dark:bg-[#d4af37] text-white dark:text-[#05110d] font-bold text-[9px] w-4 h-4 rounded-full flex items-center justify-center shadow-xs">
+                <span className="absolute -top-0.5 -right-0.5 bg-[#8c1d1e] text-white font-bold text-[9px] w-4 h-4 rounded-full flex items-center justify-center">
                   {cartCount}
                 </span>
               )}
             </button>
 
-            {/* VIP Consultation CTA */}
+            {/* Compact VIP Booking Button */}
             <button
               onClick={onOpenBooking}
-              className="hidden sm:flex items-center gap-2 bg-[#b8860b] dark:bg-[#d4af37] text-white dark:text-[#05110d] hover:bg-[#8c1d1e] dark:hover:bg-[#f7e7ce] transition-colors font-sans font-bold text-[10px] uppercase tracking-[0.2em] px-4 sm:px-5 py-2.5 shadow-md rounded-md"
+              className="hidden md:flex items-center gap-1.5 bg-[#b8860b] dark:bg-[#d4af37] text-white dark:text-[#05110d] hover:bg-[#8c1d1e] transition-colors font-sans font-bold text-[10px] uppercase tracking-wider px-3.5 py-2 rounded-full shadow-sm"
             >
-              <Calendar className="w-3.5 h-3.5" />
-              <span>{t.bookAppointment}</span>
+              <Calendar className="w-3 h-3" />
+              <span>Book VIP Visit</span>
             </button>
 
-            {/* Mobile Menu Toggle */}
+            {/* Mobile Hamburger Toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 text-[#b8860b] dark:text-[#d4af37]"
+              className="lg:hidden p-1.5 text-[#b8860b] dark:text-[#d4af37]"
               aria-label="Toggle Navigation Menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
+
         </div>
       </div>
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-white dark:bg-[#041d15] border-b border-[#e6dac1] dark:border-amber-500/40 px-6 py-6 space-y-4 text-[#1a1612] dark:text-amber-100 shadow-2xl animate-fadeIn max-h-[85vh] overflow-y-auto">
+        <div className="lg:hidden bg-white dark:bg-[#14100b] border-b border-[#ebdcc9] dark:border-[#382f25] px-6 py-5 space-y-4 text-[#1a1612] dark:text-[#f7e7ce] shadow-2xl animate-fadeIn max-h-[85vh] overflow-y-auto">
           
-          {/* Mobile Category Toggle Dropdown */}
-          <div className="border border-[#b8860b]/30 dark:border-amber-500/30 rounded-xl p-3 bg-[#faf6ee] dark:bg-[#05110d]">
-            <button
-              onClick={() => setMobileCatOpen(!mobileCatOpen)}
-              className="w-full flex items-center justify-between font-bold text-sm text-[#b8860b] dark:text-[#d4af37]"
-            >
-              <span className="flex items-center gap-2">
-                <Layers className="w-4 h-4" />
-                <span>Categories (आभूषण श्रेणियां)</span>
-              </span>
-              <ChevronDown className={`w-4 h-4 transition-transform ${mobileCatOpen ? 'rotate-180' : ''}`} />
-            </button>
-
-            {mobileCatOpen && (
-              <div className="mt-3 space-y-1.5 pt-2 border-t border-[#e6dac1] dark:border-[#d4af37]/20">
-                {mainCategoriesList.map((cat) => (
-                  <button
-                    key={cat.id}
-                    onClick={() => handleCategorySelect(cat.id)}
-                    className={`w-full text-left p-2 rounded-lg text-xs flex items-center justify-between ${
-                      cat.isHighlight
-                        ? 'bg-[#f4edd8] dark:bg-[#0d3b2e] font-bold text-[#8c1d1e] dark:text-[#d4af37]'
-                        : 'hover:bg-white dark:hover:bg-[#0d3b2e]/50 text-[#1a1612] dark:text-amber-100'
-                    }`}
-                  >
-                    <span className="flex items-center gap-2">
-                      <span>{cat.icon}</span>
-                      <span>{cat.label}</span>
-                    </span>
-                    {cat.badge && (
-                      <span className="text-[9px] bg-[#8c1d1e] text-white dark:bg-[#d4af37] dark:text-[#05110d] px-1.5 py-0.5 rounded font-bold">
-                        {cat.badge}
-                      </span>
-                    )}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-
           <nav className="flex flex-col space-y-2 font-medium text-sm">
             <button 
               onClick={() => {
                 setMobileMenuOpen(false);
                 onNavigatePage?.('home');
               }}
-              className="text-left font-bold text-base text-[#8c1d1e] dark:text-[#d4af37] py-2 border-b border-[#e6dac1] dark:border-amber-500/10 flex items-center gap-2"
+              className="text-left font-bold text-sm text-[#8c1d1e] dark:text-[#d4af37] py-2 border-b border-[#ebdcc9] dark:border-[#2d261d] flex items-center gap-2"
             >
               <span>🏰</span>
-              <span>{t.home}</span>
+              <span>Home</span>
             </button>
 
             <button 
@@ -537,52 +458,64 @@ export const Header: React.FC<HeaderProps> = ({
                 setMobileMenuOpen(false);
                 onNavigatePage?.('shop', 'all');
               }}
-              className="text-left font-bold text-base py-2.5 px-3 rounded-xl bg-gradient-to-r from-[#b45309] to-[#d97706] text-white flex items-center justify-between shadow-md"
+              className="text-left font-bold text-sm py-2.5 px-3 rounded-xl bg-gradient-to-r from-[#b45309] to-[#d97706] text-white flex items-center justify-between shadow-md"
             >
               <div className="flex items-center gap-2">
                 <ShoppingBag className="w-4 h-4" />
-                <span>{t.shopNow || 'Shop Now (Dedicated Boutique)'}</span>
+                <span>Shop Now (Dedicated Boutique)</span>
               </div>
               <span className="text-[10px] bg-white/20 px-2 py-0.5 rounded-full uppercase">All</span>
             </button>
 
+            {/* Mobile Category Options */}
+            <div className="py-2 border-b border-[#ebdcc9] dark:border-[#2d261d] space-y-1">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-[#7a6d5c] block mb-1">
+                Shop By Category
+              </span>
+              <div className="grid grid-cols-2 gap-1.5">
+                {mainCategoriesList.slice(1).map((cat) => (
+                  <button
+                    key={cat.id}
+                    onClick={() => handleCategorySelect(cat.id)}
+                    className="p-2 rounded-lg text-left text-xs bg-[#faf6ee] dark:bg-[#1a1612] border border-[#ebdcc9] dark:border-[#2d261d] truncate"
+                  >
+                    <span>{cat.icon} {cat.label.split('(')[0]}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
             <a 
-              href="#prime-collection" 
+              href="#rate-calculator" 
               onClick={() => {
                 setMobileMenuOpen(false);
                 if (currentPage !== 'home') onNavigatePage?.('home');
               }}
-              className="hover:text-[#b8860b] dark:hover:text-amber-300 py-1.5 border-b border-[#e6dac1] dark:border-amber-500/10"
+              className="hover:text-[#b8860b] py-1.5 border-b border-[#ebdcc9] dark:border-[#2d261d] block"
             >
-              {t.primeCollection}
+              Live Gold Rate
             </a>
-            <a 
-              href="#categories" 
-              onClick={() => setMobileMenuOpen(false)}
-              className="hover:text-[#b8860b] dark:hover:text-amber-300 py-1.5 border-b border-[#e6dac1] dark:border-amber-500/10"
-            >
-              {t.categories}
-            </a>
+
             <a 
               href="#craftsmanship" 
-              onClick={() => setMobileMenuOpen(false)}
-              className="hover:text-[#b8860b] dark:hover:text-amber-300 py-1.5 border-b border-[#e6dac1] dark:border-amber-500/10"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                if (currentPage !== 'home') onNavigatePage?.('home');
+              }}
+              className="hover:text-[#b8860b] py-1.5 border-b border-[#ebdcc9] dark:border-[#2d261d] block"
             >
-              {t.craftsmanship}
+              Heritage & Craftsmanship
             </a>
-            <a 
-              href="#rate-calculator" 
-              onClick={() => setMobileMenuOpen(false)}
-              className="hover:text-[#b8860b] dark:hover:text-amber-300 py-1.5 border-b border-[#e6dac1] dark:border-amber-500/10"
-            >
-              {t.goldRate}
-            </a>
+
             <a 
               href="#reviews" 
-              onClick={() => setMobileMenuOpen(false)}
-              className="hover:text-[#b8860b] dark:hover:text-amber-300 py-1.5 border-b border-[#e6dac1] dark:border-amber-500/10"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                if (currentPage !== 'home') onNavigatePage?.('home');
+              }}
+              className="hover:text-[#b8860b] py-1.5 border-b border-[#ebdcc9] dark:border-[#2d261d] block"
             >
-              {t.reviews}
+              Royal Customer Reviews
             </a>
           </nav>
 
@@ -591,10 +524,10 @@ export const Header: React.FC<HeaderProps> = ({
               setMobileMenuOpen(false);
               onOpenBooking();
             }}
-            className="w-full flex items-center justify-center gap-2 bg-[#b8860b] dark:bg-[#d4af37] text-white dark:text-[#05110d] font-bold text-xs uppercase tracking-wider py-3 rounded-full shadow-lg"
+            className="w-full flex items-center justify-center gap-2 bg-[#b8860b] text-white font-bold text-xs uppercase tracking-wider py-3 rounded-2xl shadow-md"
           >
             <Calendar className="w-4 h-4" />
-            <span>{t.bookAppointment}</span>
+            <span>Book VIP Appointment</span>
           </button>
         </div>
       )}

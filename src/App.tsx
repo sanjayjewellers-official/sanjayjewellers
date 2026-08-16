@@ -15,6 +15,7 @@ import { ReviewsSection } from './components/ReviewsSection';
 import { SearchModal } from './components/SearchModal';
 import { Footer } from './components/Footer';
 import { ShopPage } from './components/ShopPage';
+import { HomeShopShowcase } from './components/HomeShopShowcase';
 
 import { Language, Product, CartItem, MetalRate, Theme } from './types';
 import { PRODUCTS, INITIAL_METAL_RATES } from './data/products';
@@ -219,11 +220,11 @@ export default function App() {
               currentLang={currentLang}
             />
 
-            {/* Interactive Desi Sone-Chandi ke Abhushan Explorer */}
-            <SoneChandiExplorer
+            {/* Minimalist & Curated Royal Spotlight Showcase */}
+            <HomeShopShowcase
               products={PRODUCTS}
               currentLang={currentLang}
-              selectedMainCategory={selectedMainCategory}
+              onOpenShop={(cat) => handleNavigatePage('shop', cat || 'all')}
               onQuickView={(p) => setQuickViewProduct(p)}
               onTryOn={(p) => {
                 setTryOnProduct(p);
@@ -232,7 +233,6 @@ export default function App() {
               onAddToCart={handleAddToCart}
               onToggleWishlist={handleToggleWishlist}
               wishlistIds={wishlist}
-              onOpenShopPage={(cat) => handleNavigatePage('shop', cat || 'all')}
             />
 
             {/* Hindi Prime Collection Showcase */}
